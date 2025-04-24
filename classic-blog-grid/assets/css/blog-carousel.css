@@ -1,0 +1,235 @@
+@import url('https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,100..900;1,100..900&family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&family=Overpass:ital,wght@0,100..900;1,100..900&family=Play:wght@400;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sacramento&family=Sintony:wght@400;700&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Teko:wght@300..700&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+#clbgdCarousel {
+    position: relative;
+    padding: 20px 0;
+    max-width: 100% !important;
+    padding: 48px 0;
+}
+:where(.wp-site-blocks :focus) {
+    outline-width: unset !important;
+    outline-style: unset !important;
+  }
+  a{
+    text-decoration: none !important;
+}
+
+.carousel-item-overlay {
+  background: #000000 !important;
+  opacity: 0.4 !important;
+}
+.carousel-item-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background: rgba(0, 0, 0, 0.5);  */
+
+  /* background: rgba(192, 156, 156, 0.5);  */
+
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  text-align: center;
+  /* opacity: 0; */
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 1;
+}
+
+
+
+  .clbgd-carousel-meta-fields {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin-bottom: 0px;
+  }
+  .clbgd-carousel-cat-tag {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+  }
+  .clbgd-carousel-cat-tag p {
+    padding-right: 15px;    
+    margin-bottom: 8px;
+  }
+.clbgd-carousel-item {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+.clbgd-carousel-meta-fields p {
+    padding-right: 15px;
+    margin-bottom: 0;
+  }
+  .clbgd-social-share-buttons {
+    padding: 11px 0;
+  }
+.swiper-button-next::after, .swiper-button-prev::after {
+    font-family: swiper-icons;
+    font-size: var(--swiper-navigation-size);
+    text-transform: none !important;
+    letter-spacing: 0;
+    font-variant: initial;
+    line-height: 1;
+    background: #fff;
+    padding: 17px 18px;
+    font-size: 20px;
+  }
+  .swiper-button-next::after, .swiper-button-prev::after {
+
+    background: #fff;
+    padding: 10px 12px;
+    font-size: 20px !important;
+  }
+
+  .swiper-button-prev{
+left: 0 !important;
+  }
+
+   .swiper-button-next{
+    right: 0 !important;
+  }
+.clbgd-carousel-item:hover {
+    transform: scale(1.05);
+}
+
+.carousel-image img {
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    height: 550px;
+    object-fit: cover;
+}
+
+.carousel-content {
+  padding: 20px 48px;
+      text-align: left;
+    position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 9;
+}
+  
+
+.carousel-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.carousel-date,
+.carousel-author {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 5px;
+}
+.svg-inline--fa{
+    color: #000;
+}
+.carousel-description {
+    font-size: 14px;
+    color: #444;
+    margin-bottom: 8px;
+}
+.swiper-button-next, .swiper-button-prev{
+    color: #000 !important;
+}
+.carousel-button {
+    display: inline-block;
+    padding: 8px 15px;
+    background: #8371F6;
+            color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.carousel-button:hover {
+  background: #000;
+  color: #fff !important;
+}
+
+
+@media  (min-width: 1200px) and (max-width: 1399px){
+  .carousel-date, .carousel-author {
+    font-size: 13px;
+  }
+  .clbgd-carousel-meta-fields p{
+    font-size: 13px;
+
+  }
+}
+
+@media (max-width: 1199px){
+  .clbgd-carousel-meta-fields{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 767px){
+  .carousel-image img {
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    height: 465px;
+  }
+  .clbgd-blog-post-title2, .clbgd-blog-post-excerpt2, .clbgd-blog-post-content2{
+    text-align: center;
+  }
+  .swiper-button-next, .swiper-button-prev {
+    position: unset !important;
+    margin: 0 8px;
+  }
+    .carousel-content {
+      padding: 20px 18px;
+      display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+      
+  }
+  .carousel-content{
+    top: 0;
+  }
+  .clbgd-carousel-meta-fields{
+    flex-direction: column;
+  }
+  .clbgd-social-share-buttons{
+    text-align: center;
+  }
+  
+  .carousel-button-paginations {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 44px 0 0;
+    }
+ 
+    .swiper-button-next::after, .swiper-rtl .swiper-button-prev::after {
+    content: 'next';
+  }
+  .swiper-button-next::after, .swiper-button-prev::after {
+    font-family: swiper-icons;
+    font-size: var(--swiper-navigation-size);
+    text-transform: none !important;
+    letter-spacing: 0;
+    font-variant: initial;
+    line-height: 1;
+  }
+  .swiper-button-next::after, .swiper-button-prev::after {
+    background: #000;
+    padding: 10px 12px;
+    font-size: 20px !important;
+    color: #fff;
+    margin: 10px;
+  }
+
+}
