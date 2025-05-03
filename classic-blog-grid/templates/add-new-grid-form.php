@@ -2,25 +2,22 @@
  if (!defined('ABSPATH')) {
      exit;
  }
-
- $post_id = isset($post_id) ? $post_id : 0; 
- $grid_title = isset($grid_title) ? $grid_title : '';
- $grid_layout = isset($grid_layout) ? $grid_layout : 'list';
- $sort_order = isset($sort_order) ? $sort_order : 'DESC';
-//  i modify
+$post_id = isset($post_id) ? $post_id : 0; 
+$grid_title = isset($grid_title) ? $grid_title : '';
+$grid_layout = isset($grid_layout) ? $grid_layout : 'list';
+$sort_order = isset($sort_order) ? $sort_order : 'DESC';
 $show_date = isset($show_date) ? $show_date : true;
 $show_author = isset($show_author) ? $show_author : true;
 $show_excerpt = isset($show_excerpt) ? $show_excerpt : true;
-
 //end
- $show_categories = isset($show_categories) ? $show_categories : false; 
- $show_comments = isset($show_comments) ? $show_comments : false; 
- $posts_per_row = isset($posts_per_row) ? $posts_per_row : 3; 
- $display_search_box = isset($display_search_box) ? $display_search_box : false; 
- $enable_sidebar_category_filter = isset($enable_sidebar_category_filter) ? $enable_sidebar_category_filter : false; 
- $enable_featured_posts = isset($enable_featured_posts) ? $enable_featured_posts : false;
- $enable_featured_image = isset($enable_featured_image) ? $enable_featured_image : 'enable';
- $enable_ajax_masonry = isset($enable_ajax_masonry) ? $enable_ajax_masonry : 'disable';
+$show_categories = isset($show_categories) ? $show_categories : false; 
+$show_comments = isset($show_comments) ? $show_comments : false; 
+$posts_per_row = isset($posts_per_row) ? $posts_per_row : 3; 
+$display_search_box = isset($display_search_box) ? $display_search_box : false; 
+$enable_sidebar_category_filter = isset($enable_sidebar_category_filter) ? $enable_sidebar_category_filter : false; 
+$enable_featured_posts = isset($enable_featured_posts) ? $enable_featured_posts : false;
+$enable_featured_image = isset($enable_featured_image) ? $enable_featured_image : 'enable';
+$enable_ajax_masonry = isset($enable_ajax_masonry) ? $enable_ajax_masonry : 'disable';
 $slider_animation = isset(  $slider_animation) ?   $slider_animation : false;
 $grid_overlay = isset($grid_overlay) ?  $grid_overlay : false;
 $blog_title_font = get_post_meta($post_id, '_clbgd_blog_title_font', true) ?: 'Arial';
@@ -32,10 +29,7 @@ $display_search_box = get_post_meta($post_id, '_clbgd_display_search_box', true)
 $enable_sidebar_category_filter = get_post_meta($post_id, '_clbgd_enable_sidebar_category_filter', true);
 $show_tags = get_post_meta($post_id, '_clbgd_show_tags', true);
 $show_social_share = get_post_meta($post_id, '_clbgd_show_social_share', true);
-
-
 $is_premium_user = get_option('classic_blog_grid_is_premium', false);
-
 ?>
 
 <div class="container-fluid">
@@ -58,8 +52,6 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
             </div>
             <div class="clbgd-border"></div>
         </div>
-
-
         <div class="wrap">
             <h1><?php echo esc_html($post_id ? __('Edit Grid', 'classic-blog-grid') : __('Add New Grid', 'classic-blog-grid')); ?>
             </h1>
@@ -83,8 +75,6 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                             <label for="grid_layout"><?php esc_html_e('Grid Layout', 'classic-blog-grid'); ?></label>
                         </th>
                         <td>
-
-
                             <div class="grid-layout-options">
 
                                 <label>
@@ -233,20 +223,14 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                 </label>
 
                             </div>
-
-
                         </td>
-                    </tr>
-                    <!-- new setting for masonary -->
-
-                    <!-- i add for layout settings -->
+                     </tr>
                     <tr>
                         <th scope="row">
                             <label
                                 for="grid_layout"><?php esc_html_e('Layout Settings', 'classic-blog-grid'); ?></label>
                         </th>
                         <td>
-
                             <div class="settings-box">
                                 <div class="settings-grid">
                                     <div class="settings-grid-label">
@@ -301,12 +285,7 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                                     }
                                                 }
                                                 ?>
-
-
-                                                <button type="button"
-                                                    class="dropdown-toggle"><?php echo esc_html($selected_label); ?></button>
-
-
+                                                <button type="button" class="dropdown-toggle"><?php echo esc_html($selected_label); ?></button>
                                                 <ul class="dropdown-menu">
                                                     <li data-value="DESC"
                                                         class="dropdown-item <?php echo $sort_order == 'DESC' ? 'selected' : ''; ?>">
@@ -420,12 +399,9 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                     <!-- Column 2 - Additional Settings -->
                                     <div class="settings-column">
                                         <!-- Display Search Box (PRO) -->
-
                                         <div class="option-row">
                                             <label for="display_search_box">Display Search Box:
-                                             
                                                     <span class="pro-badge"><i class="fa-solid fa-crown"></i> PRO</span>
-                                            
                                             </label>
                                             <div class="option-group">
                                                 <label>
@@ -479,18 +455,11 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                                </label>
                                            </div>
                                        </div>
-
-
-
-
                                     </div>
                                 </div>
                             </div>
-
                         </td>
                     </tr>
-
-
                     <tr>
                         <th scope="row">
                             <label
@@ -515,10 +484,7 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                             </label>
                                         </div>
                                     </div>
-
                                     <!-- Slider Animation -->
-
-
                                     <div class="styling-customization-row slider-animation-options premium-feature">
                                         <label for="slider_animation">Slider Animation 
                                         </label>
@@ -540,8 +506,6 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                             </select>
                                         </div>
                                     </div>
-
-
                                     <!-- new one add for font -->
                                     <?php
                                     // List of font families 
@@ -574,13 +538,10 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                         'Josefin Sans' => 'Josefin Sans',
                                     ];
                                     
-                                    
                                     // Set default font if not set
                                     $blog_title_font = isset($blog_title_font) ? $blog_title_font : 'Arial';
                                     $blog_excerpt_font = isset($blog_excerpt_font) ? $blog_excerpt_font : 'Arial';
                                     ?>
-                                    
-                                    
                                     <div class="styling-customization-row blog-title-font-options premium-feature">
                                         <label for="blog_title_font">Blog Title Font</label>
                                         <span class="pro-badge"><i class="fa fa-crown"></i> PRO</span>
@@ -617,29 +578,124 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                             <?php echo !$is_premium_user ? 'disabled' : ''; ?> />
                                     </div>
                                      
-                                    <!-- for font color -->
+                                    <!-- for font color -->                           
                                     <div class="styling-customization-row-box">
-                                    <div class="styling-customization-row global-font-color-option">
-                                        <label for="global_font_color">Font Color for All Text</label><span class="pro-badge"></i>Free</span>
-                                        <input type="color" name="global_font_color" id="global_font_color"
-                                            value="<?php echo esc_attr($global_font_color); ?>"
-                                             />
+                                       <!-- new one end for font -->
+                                       <div class="styling-customization-row global-font-color-option">
+                                           <label for="tittle_font_color">Tittle Font Color</label><span class="pro-badge"></i>Free</span>
+                                           <input type="color" name="tittle_font_color" id="tittle_font_color"
+                                               value="<?php echo esc_attr($tittle_font_color); ?>"
+                                                />
+                                       </div>
+                                       
+                                        <div class="styling-customization-row global-font-color-option">
+                                            <label for="tittle_hover_color">Tittle Hover Color</label><span class="pro-badge"></i>Free</span>
+                                            <input type="color" name="tittle_hover_color" id="tittle_hover_color"
+                                                value="<?php echo esc_attr($tittle_hover_color); ?>"
+                                                 />
+                                        </div>
                                     </div>
 
+                                    <!-- new for hover -->
+                                    <div class="styling-customization-row-box">
+                                        <!-- Title Font Weight -->
+                                        <div class="styling-customization-row global-font-weight-option">
+                                            <label for="tittle_font_weight">Tittle Font Weight</label><span class="pro-badge">Free</span>
+                                            <?php $tittle_font_weight = isset($tittle_font_weight) ? $tittle_font_weight : 'normal';?>
+                                            <select name="tittle_font_weight" id="tittle_font_weight">
+                                                <option value="normal" <?php selected($tittle_font_weight, 'normal'); ?>>Normal</option>
+                                                <option value="bold" <?php selected($tittle_font_weight, 'bold'); ?>>Bold</option>
+                                                <option value="100" <?php selected($tittle_font_weight, '100'); ?>>100</option>
+                                                <option value="200" <?php selected($tittle_font_weight, '200'); ?>>200</option>
+                                                <option value="300" <?php selected($tittle_font_weight, '300'); ?>>300</option>
+                                                <option value="400" <?php selected($tittle_font_weight, '400'); ?>>400</option>
+                                                <option value="500" <?php selected($tittle_font_weight, '500'); ?>>500</option>
+                                                <option value="600" <?php selected($tittle_font_weight, '600'); ?>>600</option>
+                                                <option value="700" <?php selected($tittle_font_weight, '700'); ?>>700</option>
+                                                <option value="800" <?php selected($tittle_font_weight, '800'); ?>>800</option>
+                                                <option value="900" <?php selected($tittle_font_weight, '900'); ?>>900</option>
+                                            </select>
+                                        </div>
+                                     </div>
+                                    <!-- end -->
 
-                                    <!-- new one end for font -->
 
-                                    <!-- for grid overlay -->
-                                    <div class="styling-customization-row grid-overlay-color-option">
-                                        <label for="grid_overlay_color">Grid Overlay Color</label><span class="pro-badge"><i class="fa fa-crown"></i> PRO</span>
-                                        <input type="color" name="grid_overlay_color" id="grid_overlay_color"
-                                            value="<?php echo esc_attr($grid_overlay_color); ?>"  <?php echo !$is_premium_user ? 'disabled' : ''; ?>/>
+                                    <div class="styling-customization-row-box">
+                                       <!-- new one end for font -->
+                                       <div class="styling-customization-row global-font-color-option">
+                                           <label for="excerpt_font_color">Excerpt Font Color</label><span class="pro-badge"></i>Free</span>
+                                           <input type="color" name="excerpt_font_color" id="excerpt_font_color"
+                                               value="<?php echo esc_attr($excerpt_font_color); ?>"
+                                                />
+                                       </div>
+
+                                       <div class="styling-customization-row global-font-weight-option">
+                                            <label for="excerpt_font_weight">Excerpt Font Weight</label><span class="pro-badge">Free</span>
+                                           <?php $excerpt_font_weight = isset($excerpt_font_weight) ? $excerpt_font_weight : 'normal';?>
+                                            <select name="excerpt_font_weight" id="excerpt_font_weight">
+                                                <option value="normal" <?php selected($excerpt_font_weight, 'normal'); ?>>Normal</option>
+                                                <option value="bold" <?php selected($excerpt_font_weight, 'bold'); ?>>Bold</option>
+                                                <option value="100" <?php selected($excerpt_font_weight, '100'); ?>>100</option>
+                                                <option value="200" <?php selected($excerpt_font_weight, '200'); ?>>200</option>
+                                                <option value="300" <?php selected($excerpt_font_weight, '300'); ?>>300</option>
+                                                <option value="400" <?php selected($excerpt_font_weight, '400'); ?>>400</option>
+                                                <option value="500" <?php selected($excerpt_font_weight, '500'); ?>>500</option>
+                                                <option value="600" <?php selected($excerpt_font_weight, '600'); ?>>600</option>
+                                                <option value="700" <?php selected($excerpt_font_weight, '700'); ?>>700</option>
+                                                <option value="800" <?php selected($excerpt_font_weight, '800'); ?>>800</option>
+                                                <option value="900" <?php selected($excerpt_font_weight, '900'); ?>>900</option>
+                                            </select>
+                                        </div>
+                                       
                                     </div>
 
+                                    <!-- new for hover -->
+
+                                    <div class="styling-customization-row-box">
+                                       <!-- new one end for font -->
+                                       <div class="styling-customization-row global-font-color-option">
+                                           <label for="meta_font_color">Meta Data Font Color</label><span class="pro-badge"></i>Free</span>
+                                           <input type="color" name="meta_font_color" id="meta_font_color"
+                                               value="<?php echo esc_attr($meta_font_color); ?>"
+                                                />
+                                       </div>
+
+                                       <div class="styling-customization-row global-font-weight-option">
+                                            <label for="meta_font_weight">Meta Data Font Weight</label><span class="pro-badge">Free</span>
+                                            <?php $meta_font_weight = isset($meta_font_weight) ? $meta_font_weight : 'normal';?>
+                                            <select name="meta_font_weight" id="meta_font_weight">
+                                                <option value="normal" <?php selected($meta_font_weight, 'normal'); ?>>Normal</option>
+                                                <option value="bold" <?php selected($meta_font_weight, 'bold'); ?>>Bold</option>
+                                                <option value="100" <?php selected($meta_font_weight, '100'); ?>>100</option>
+                                                <option value="200" <?php selected($meta_font_weight, '200'); ?>>200</option>
+                                                <option value="300" <?php selected($meta_font_weight, '300'); ?>>300</option>
+                                                <option value="400" <?php selected($meta_font_weight, '400'); ?>>400</option>
+                                                <option value="500" <?php selected($meta_font_weight, '500'); ?>>500</option>
+                                                <option value="600" <?php selected($meta_font_weight, '600'); ?>>600</option>
+                                                <option value="700" <?php selected($meta_font_weight, '700'); ?>>700</option>
+                                                <option value="800" <?php selected($meta_font_weight, '800'); ?>>800</option>
+                                                <option value="900" <?php selected($meta_font_weight, '900'); ?>>900</option>
+                                            </select>
+                                        </div>
+                                       
                                     </div>
-                              
 
-
+                                    <!-- global -->
+                                    <div class="styling-customization-row-box">
+                                       <div class="styling-customization-row global-font-color-option">
+                                           <label for="global_font_color">Button Font Color</label><span class="pro-badge"></i>Free</span>
+                                           <input type="color" name="global_font_color" id="global_font_color"
+                                               value="<?php echo esc_attr($global_font_color); ?>"
+                                                />
+                                       </div>
+                                       <!-- new one end for font -->
+                                       <div class="styling-customization-row grid-overlay-color-option">
+                                          <label for="grid_overlay_color">Grid Overlay Color</label><span class="pro-badge"><i class="fa fa-crown"></i> PRO</span>
+                                          <input type="color" name="grid_overlay_color" id="grid_overlay_color"
+                                              value="<?php echo esc_attr($grid_overlay_color); ?>"  <?php echo !$is_premium_user ? 'disabled' : ''; ?>/>
+                                       </div>
+                                    </div>
+                                   
                                 </div>
                             </div>
 
@@ -664,11 +720,7 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                             </div>
 
                         </td>
-
                     </tr>
-
-
-
                     <!-- end -->
                 </table>
                 <?php submit_button($post_id ? esc_html__('Update Grid', 'classic-blog-grid') : esc_html__('Add Grid', 'classic-blog-grid')); ?>

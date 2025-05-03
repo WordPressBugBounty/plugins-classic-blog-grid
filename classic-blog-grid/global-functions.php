@@ -1,8 +1,6 @@
 <?php
 function clbgd_get_collections() {
-    
     $endpoint_url = CLBGD_API_URL . 'getCollections';
-
     $options = [
         'body' => [],
         'headers' => [
@@ -130,7 +128,6 @@ function clbgd_get_filtered_products_ajax() {
 
 add_action('wp_ajax_clbgd_get_filtered_products', 'clbgd_get_filtered_products_ajax');
 add_action('wp_ajax_nopriv_clbgd_get_filtered_products', 'clbgd_get_filtered_products_ajax');
-
 add_action('admin_notices', 'clbgd_admin_notice_with_html');
 
 function clbgd_admin_notice_with_html() {
@@ -157,11 +154,9 @@ function clbgd_admin_notice_with_html() {
     </div>
     <?php
 }
-
 add_action('wp_ajax_clbgd_dismiss_notice', 'clbgd_dismiss_notice_callback');
 function clbgd_dismiss_notice_callback() {
     check_ajax_referer('clbgd_dismiss_nonce', 'nonce');
-
     set_transient('clbgd_notice_dismissed', true, 24 * HOUR_IN_SECONDS);
 
     wp_send_json_success();

@@ -31,46 +31,28 @@ class Clbgd_Core {
         add_action('init', array($this, 'clbgd_register_post_type'));
         add_action('admin_menu', array($this, 'clbgd_register_admin_menu'));
         add_action('admin_enqueue_scripts', array($this, 'clbgd_load_admin_assets'));
-
         add_action('admin_post_clbgd_save_grid', array($this, 'clbgd_handle_save_grid'));
-
         add_filter('get_edit_post_link', array($this, 'clbgd_grid_edit_link'), 10, 3);
-
         add_filter('post_row_actions', array($this, 'clbgd_add_new_grid_link'), 10, 2);
         add_filter('admin_url', array($this, 'clbgd_redirect_add_new_grid'), 10, 2);
-
         add_filter('manage_clbgd_grid_posts_columns', array($this, 'clbgd_add_shortcode_column'));
         add_action('manage_clbgd_grid_posts_custom_column', array($this, 'clbgd_display_shortcode_column'), 10, 2);
-    //    add_action('init', array($this, 'clbgd_register_shortcodes'));
-       
     }
-
 
     public function clbgd_load_admin_assets($hook) {
         $current_screen = get_current_screen();
         if (strpos($current_screen->id, 'classic-blog-grid') !== false || $current_screen->post_type === 'clbgd_grid') {
             remove_all_actions('admin_notices');
             remove_all_actions('all_admin_notices');
-        // }
-
-        // if ('admin.php?page=clbgd_add_new_grid' === $hook) {
-
-      //  if ('toplevel_page_classic-blog-grid' == $hook || 'classic-blog-grid_page_clbgd_collections_templates' == $hook ) {
-
-
             wp_enqueue_style('clbgd-admin-css', CLBGD_PLUGIN_URL . 'assets/css/admin-styles.css', array(), CLBGD_PLUGIN_VERSION);
             wp_enqueue_style( 'clbgd-admin-boostrap-css', CLBGD_PLUGIN_URL . 'assets/css/bootstrap.min.css', array(), CLBGD_PLUGIN_VERSION );
             wp_enqueue_script('clbgd-pagination-js', CLBGD_PLUGIN_URL . 'assets/js/clbgd-pagination.js', array('jquery'), CLBGD_PLUGIN_VERSION, true);
-
             wp_enqueue_style('font-awesome-dash', CLBGD_PLUGIN_URL . 'assets/lib/css/fontawesome-all.min.css', array(), CLBGD_PLUGIN_VERSION);
-
             wp_enqueue_script('font-awesome-dash', CLBGD_PLUGIN_URL . 'assets/lib/js/fontawesome-all.min.js', array(), CLBGD_PLUGIN_VERSION, true);
-
             wp_localize_script('clbgd-pagination-js', 'clbgd_pagination_object', array(
                 'ajaxurl' => admin_url('admin-ajax.php'),
                 'nonce'   => wp_create_nonce('clbgd_create_pagination_nonce_action')
             ));
-
         }
         wp_enqueue_style('clbgd-admin-dashboard-css', CLBGD_PLUGIN_URL . 'assets/css/admin-dashboard.css', array(), CLBGD_PLUGIN_VERSION);
         wp_enqueue_script('clbgd-admin-js', CLBGD_PLUGIN_URL . 'assets/js/admin-scripts.js', array('jquery'), CLBGD_PLUGIN_VERSION, true);
@@ -217,7 +199,6 @@ class Clbgd_Core {
         include CLBGD_PLUGIN_DIR . 'templates/clbgd-templates.php';
     }
 
-    
     public function render_add_new_grid_page() {
         $post_id = isset($_GET['post_id']) ? intval($_GET['post_id']) : 0;
         $grid_title = '';
@@ -230,7 +211,6 @@ class Clbgd_Core {
         $excerpt_length = 15; 
         $show_categories= 0;
         $posts_per_row = 3;
-        // $enable_featured_image = 1;
 
         if ($post_id) {
             $post = get_post($post_id);
@@ -243,19 +223,22 @@ class Clbgd_Core {
                 $show_author = get_post_meta($post_id, '_clbgd_show_author', true);
                 $show_excerpt = get_post_meta($post_id, '_clbgd_show_excerpt', true);
                 $excerpt_length = get_post_meta($post_id, '_clbgd_excerpt_length', true);
-
                 $show_categories = get_post_meta($post_id, '_clbgd_show_categories', true) ?: 0;
                 $show_comments = get_post_meta($post_id, '_clbgd_show_comments', true) ?: 0;
-
                 $posts_per_row = get_post_meta($post_id, '_clbgd_posts_per_row', true) ?: 3;
                 $enable_featured_image = get_post_meta($post_id, '_clbgd_enable_featured_image', true);
-
                 $enable_ajax_masonry = get_post_meta($post_id, '_clbgd_enable_ajax_masonry', true);
-
                 $slider_animation = get_post_meta($post_id, '_clbgd_slider_animation', true) ?: 'fade';
                 $global_font_color = get_post_meta($post_id, '_clbgd_global_font_color', true);
-
                 $grid_overlay_color = get_post_meta($post_id, '_clbgd_grid_overlay_color', true);
+                //new
+                $tittle_font_color = get_post_meta($post_id, '_clbgd_tittle_font_color', true);
+                $tittle_hover_color = get_post_meta($post_id, '_clbgd_tittle_hover_color', true);
+                $tittle_font_weight = get_post_meta($post_id, '_clbgd_tittle_font_weight', true);
+                $excerpt_font_color = get_post_meta($post_id, '_clbgd_excerpt_font_color', true);
+                $excerpt_font_weight = get_post_meta($post_id, '_clbgd_excerpt_font_weight', true);
+                $meta_font_color = get_post_meta($post_id, '_clbgd_meta_font_color', true);
+                $meta_font_weight = get_post_meta($post_id, '_clbgd_meta_font_weight', true);
 
             }
         }
@@ -287,10 +270,16 @@ class Clbgd_Core {
         $posts_per_row = isset($_POST['posts_per_row']) ? intval($_POST['posts_per_row']) : 2;
         // new setting
         $enable_featured_image = isset($_POST['enable_featured_image']) ? sanitize_text_field($_POST['enable_featured_image']) : 'enable';
-      
-        //global font color
         $global_font_color = isset($_POST['global_font_color']) ? sanitize_hex_color($_POST['global_font_color']) : '';
         $enable_ajax_masonry = isset($_POST['enable_ajax_masonry']) ? sanitize_text_field($_POST['enable_ajax_masonry']) : 'disable';
+        // new added 
+        $tittle_font_color = isset($_POST['tittle_font_color']) ? sanitize_hex_color($_POST['tittle_font_color']) : '';
+        $tittle_hover_color = isset($_POST['tittle_hover_color']) ? sanitize_hex_color($_POST['tittle_hover_color']) : '';
+        $tittle_font_weight = isset($_POST['tittle_font_weight']) ? sanitize_text_field($_POST['tittle_font_weight']) : '';
+        $excerpt_font_color = isset($_POST['excerpt_font_color']) ? sanitize_hex_color($_POST['excerpt_font_color']) : '';
+        $excerpt_font_weight = isset($_POST['excerpt_font_weight']) ? sanitize_text_field($_POST['excerpt_font_weight']) : '';
+        $meta_font_color = isset($_POST['meta_font_color']) ? sanitize_hex_color($_POST['meta_font_color']) : '';
+        $meta_font_weight = isset($_POST['meta_font_weight']) ? sanitize_text_field($_POST['meta_font_weight']) : '';
 
         $post_id = isset($_POST['post_id']) ? intval($_POST['post_id']) : 0;
         $post_data = array(
@@ -309,21 +298,20 @@ class Clbgd_Core {
             update_post_meta($post_id, '_clbgd_show_author', $show_author);
             update_post_meta($post_id, '_clbgd_show_excerpt', $show_excerpt);
             update_post_meta($post_id, '_clbgd_excerpt_length', $excerpt_length);
-
-            // Save these new fields
             update_post_meta($post_id, '_clbgd_show_categories', $show_categories);
             update_post_meta($post_id, '_clbgd_show_comments', $show_comments);
-
             update_post_meta($post_id, '_clbgd_posts_per_row', $posts_per_row);
-
             update_post_meta($post_id, '_clbgd_enable_ajax_masonry', $enable_ajax_masonry);
-
-
             //new setting
             update_post_meta($post_id, '_clbgd_enable_featured_image', $enable_featured_image);
-            //fon
             update_post_meta($post_id, '_clbgd_global_font_color', $global_font_color);
-
+            update_post_meta($post_id, '_clbgd_tittle_font_color', $tittle_font_color);
+            update_post_meta($post_id, '_clbgd_tittle_hover_color', $tittle_hover_color);
+            update_post_meta($post_id, '_clbgd_tittle_font_weight', $tittle_font_weight);
+            update_post_meta($post_id, '_clbgd_excerpt_font_color', $excerpt_font_color);
+            update_post_meta($post_id, '_clbgd_excerpt_font_weight', $excerpt_font_weight);
+            update_post_meta($post_id, '_clbgd_meta_font_color', $meta_font_color);
+            update_post_meta($post_id, '_clbgd_meta_font_weight', $meta_font_weight);
         }
 
         wp_redirect(admin_url('edit.php?post_type=clbgd_grid'));

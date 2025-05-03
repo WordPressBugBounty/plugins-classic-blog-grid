@@ -1,13 +1,13 @@
 @font-face {
     font-family: 'Segoe UI Bold';
-    src: url('../font/Segoe UI Bold.ttf') format('truetype');
+    src: url('../font/Segoe_UI_Bold.ttf') format('truetype');
     font-style: normal;
     font-stretch: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'Segoe UI';
-    src: url('../font/Segoe UI.ttf') format('truetype');
+    src: url('../font/Segoe_UI.ttf') format('truetype');
     font-style: normal;
     font-stretch: normal;
     font-display: swap;

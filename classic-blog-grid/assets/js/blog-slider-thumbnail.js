@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
         spaceBetween: 10,  
         freeMode: true,    
         watchSlidesProgress: true,
-        loop: false, // Disable loop for thumbnails
+        loop: false, 
     });
 
     var mainSwiper = new Swiper(".main-slider", {
@@ -25,25 +25,20 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         on: {
             slideChangeTransitionEnd: function () {
-                // Get the correct index based on realIndex
                 let correctIndex = mainSwiper.realIndex;
-
                 // Sync the thumbnail slider to the main slider
                 thumbSwiper.slideTo(correctIndex);
-
-                // Remove active class from all thumbnails
+                // Remove active class 
                 document.querySelectorAll(".thumbnail-image").forEach((el) => {
                     el.classList.remove("active-thumbnail");
                 });
-
-                // Add active class to the correct thumbnail
+                // Add active class 
                 if (document.querySelectorAll(".thumbnail-image")[correctIndex]) {
                     document.querySelectorAll(".thumbnail-image")[correctIndex].classList.add("active-thumbnail");
                 }
             }
         }
     });
-
     // Set initial active thumbnail
     document.querySelectorAll(".thumbnail-image")[0].classList.add("active-thumbnail");
 });

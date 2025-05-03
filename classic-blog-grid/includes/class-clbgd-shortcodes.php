@@ -5,7 +5,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Clbgd_Shortcodes {
     private static $instance = null;
-
     //Singleton Pattern 
     public static function get_instance() {
         if (self::$instance === null) {
@@ -13,20 +12,15 @@ class Clbgd_Shortcodes {
         }
         return self::$instance;
     }
-
     private function __construct() {
         add_shortcode('clbgd', array($this, 'clbgd_render_blog_grid'));
     }
-
     public function clbgd_render_blog_grid($atts) {
         $atts = shortcode_atts(array('id' => ''), $atts, 'clbgd');
         $post_id = $atts['id'];
-
         $meta_values = $this->get_post_meta_values($post_id);
 
         //new add 
-
-
         switch ($meta_values['grid_layout']) {
             case 'masonry':
                 return $this->render_grid('masonry', $meta_values, $post_id);
@@ -67,29 +61,24 @@ class Clbgd_Shortcodes {
             'show_comments'      => get_post_meta($post_id, '_clbgd_show_comments', true),
             'posts_per_row'      => get_post_meta($post_id, '_clbgd_posts_per_row', true),
             'enable_featured_image' => get_post_meta($post_id, '_clbgd_enable_featured_image', true) ?: 'disable',
-
             'title_font_family' => get_post_meta($post_id, "_clbgd_blog_title_font", true) ?: 'Arial',
             'title_font_size'   => get_post_meta($post_id, "_clbgd_blog_title_font_size", true) ?: '',
             'excerpt_font_family' => get_post_meta($post_id, "_clbgd_blog_excerpt_font", true) ?: 'Arial',
             'excerpt_font_size' => get_post_meta($post_id, "_clbgd_blog_excerpt_font_size", true) ?: '',
-
             'custom_css' => get_post_meta($post_id, '_clbgd_custom_css', true) ?: '',
-
-
             '_clbgd_display_search_box' => get_post_meta($post_id, '_clbgd_display_search_box', true) ?: '',
             '_clbgd_enable_sidebar_category_filter' => get_post_meta($post_id, '_clbgd_enable_sidebar_category_filter', true) ?: '',
-
-            // 'show_date'          => get_post_meta($post_id, '_clbgd_show_tags', true),
             'show_tags'        => get_post_meta($post_id, '_clbgd_show_tags', true) ?: '',
-
             'show_social_share'        => get_post_meta($post_id, '_clbgd_show_social_share', true),
-
             'font_color' => get_post_meta($post_id, '_clbgd_global_font_color', true) ?: '#000',
-
             'grid_overlay_color' => get_post_meta($post_id, '_clbgd_grid_overlay_color', true) ?: '#000',
-            
-
-
+            'tittle_font_color' => get_post_meta($post_id, '_clbgd_tittle_font_color', true) ?: '#000',
+            'tittle_hover_color' => get_post_meta($post_id, '_clbgd_tittle_hover_color', true) ?: '#428fff',
+            'tittle_font_weight' => get_post_meta($post_id, '_clbgd_tittle_font_weight', true) ?: '',
+            'excerpt_font_color' => get_post_meta($post_id, '_clbgd_excerpt_font_color', true) ?: '#000',
+            'excerpt_font_weight' => get_post_meta($post_id, '_clbgd_excerpt_font_weight', true) ?: '',
+            'meta_font_color' => get_post_meta($post_id, '_clbgd_meta_font_color', true) ?: '#000',
+            'meta_font_weight' => get_post_meta($post_id, '_clbgd_meta_font_weight', true) ?: '',
         );
     }
 
@@ -113,14 +102,10 @@ class Clbgd_Shortcodes {
 
         $style_file = CLBGD_PLUGIN_URL . "assets/css/{$styles[$type]}.css";
         $script_file = CLBGD_PLUGIN_URL . "assets/js/{$styles[$type]}.js";
-        
         wp_enqueue_script('masonry');
         wp_enqueue_script('imagesloaded');
-
         wp_enqueue_style("clbgd-{$styles[$type]}-css", $style_file, array(), CLBGD_PLUGIN_VERSION);
         wp_enqueue_script("clbgd-{$styles[$type]}-js", $script_file, array('jquery', 'masonry'), CLBGD_PLUGIN_VERSION, true);
-
-
 
         //new one add 
         $blog_font_css = "
@@ -131,9 +116,27 @@ class Clbgd_Shortcodes {
         }
         .clbgd-blog-post-content2 a { 
             color: " . esc_attr($meta_values['font_color']) . " ; 
-          }
+        }
 
-        .clbgd-blog-post-title2 {
+        .clbgd-blog-post-tittle-font { 
+            color: " . esc_attr($meta_values['tittle_font_color']) . " !important; 
+            font-weight: " . esc_attr($meta_values['tittle_font_weight']) . " !important; 
+        }
+        .clbgd-blog-post-tittle-font a:hover { 
+            color: " . esc_attr($meta_values['tittle_hover_color']) . " !important; 
+        }
+
+        .clbgd-blog-post-excerpt-font { 
+            color: " . esc_attr($meta_values['excerpt_font_color']) . " !important; 
+            font-weight: " . esc_attr($meta_values['excerpt_font_weight']) . " !important; 
+        }
+
+        .clbgd-blog-post-meta-font { 
+            color: " . esc_attr($meta_values['meta_font_color']) . " !important; 
+            font-weight: " . esc_attr($meta_values['meta_font_weight']) . " !important; 
+        }
+
+        .clbgd-blog-post-tittle-font {
             font-family: {$meta_values['title_font_family']}, sans-serif !important;
             font-size: {$meta_values['title_font_size']}px !important;
         }
@@ -149,21 +152,18 @@ class Clbgd_Shortcodes {
          .slider-item-overlay {
             background: " . esc_attr($meta_values['grid_overlay_color']) . " !important;
         }
-               .slider-thambnail-item-overlay {
+        .slider-thambnail-item-overlay {
             background: " . esc_attr($meta_values['grid_overlay_color']) . " !important;
         }
         .carousel-item-overlay {
             background: " . esc_attr($meta_values['grid_overlay_color']) . " !important;
         }
 
-          .timeline-item-overlay {
+        .timeline-item-overlay {
             background: " . esc_attr($meta_values['grid_overlay_color']) . " !important;
         }
     ";
     wp_add_inline_style("clbgd-{$styles[$type]}-css", $blog_font_css);
-
-
-    // new add '
       // Add inline styles for masonry layout
       if ($type === 'masonry') {
           $masonry_css = "
@@ -175,21 +175,14 @@ class Clbgd_Shortcodes {
           wp_add_inline_style("clbgd-{$styles[$type]}-css", $masonry_css);
       }
     //end
-
-
-    
     //custom css
     if (!empty($meta_values['custom_css'])) {
         wp_add_inline_style("clbgd-{$styles[$type]}-css", $meta_values['custom_css']);
     }
     //end 
-
          wp_localize_script("clbgd-{$styles[$type]}-js", 'clbgd_ajax', array(
              'ajaxurl' => admin_url('admin-ajax.php')
          ));
-
-    
-        // Add inline CSS for masonry layout
         if ($type === 'masonry') {
             $inline_css = sprintf(
                 '.clbgd-masonry-container {
@@ -207,8 +200,6 @@ class Clbgd_Shortcodes {
             );
             wp_add_inline_style('clbgd-blog-masonry-css', $inline_css);
         }
-
-
         // pass the animation 
         if ($type === 'slider' || $type === 'slider-thumbnail') {
             $slider_animation = get_post_meta($post_id, '_clbgd_slider_animation', true);
@@ -216,14 +207,12 @@ class Clbgd_Shortcodes {
             if (!$slider_animation) {
                 $slider_animation = 'slide'; 
             }
-        
             wp_localize_script("clbgd-{$styles[$type]}-js", 'clbgdSliderSettings', array(
                 'animation' => $slider_animation,
                 'security' => wp_create_nonce('clbgd_ajax_nonce')
             ));
         }
         //end 
-
         // Load  template
         ob_start();
         $meta_values = $meta_values; 
@@ -232,7 +221,6 @@ class Clbgd_Shortcodes {
         return ob_get_clean();
     }
 }
-
 //Initialize the singleton instance
 Clbgd_Shortcodes::get_instance();
 

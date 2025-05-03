@@ -271,3 +271,6 @@ align-items: flex-start !important;
   background-color: #cccccc; 
   cursor: not-allowed; 
 }
+.page-numbers.current {
+  background-color: #009fff;
+}

@@ -4,7 +4,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 $posts_per_page = get_post_meta($post_id, '_clbgd_posts_per_page', true);
 $posts_per_page = $posts_per_page ? $posts_per_page : 5;
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-
 $show_date = $meta_values['show_date'];
 $show_author = $meta_values['show_author'];
 $show_comments = $meta_values['show_comments'];
@@ -14,12 +13,9 @@ $show_categories = $meta_values['show_categories'];
 $enable_featured_image = $meta_values['enable_featured_image'];
 $show_social_share = $meta_values['show_social_share'];
 $show_tags = isset($meta_values['show_tags']) ? $meta_values['show_tags'] : false;
-
 //new sort order
-
 $sort_order = get_post_meta($post_id, '_clbgd_sort_order', true);
 $sort_order = $sort_order ? strtoupper($sort_order) : 'DESC'; 
-
 // sorting options
 $sort_options = array(
 
@@ -32,38 +28,24 @@ $sort_options = array(
     'AUTHOR'     => ['orderby' => 'author', 'order' => 'ASC'],
     'POPULARITY' => ['orderby' => 'meta_value_num', 'order' => 'DESC', 'meta_key' => 'post_views_count'],
     'COMMENT'    => ['orderby' => 'comment_count', 'order' => 'DESC'],
-
-    // 'FEATURED'   => [
-    //     'orderby' => ['meta_value_num' => 'DESC', 'date' => 'DESC'],
-    //     'meta_key' => 'is_featured'
-    // ],
-
     'CUSTOM'     => ['orderby' => 'meta_value_num', 'order' => 'ASC', 'meta_key' => 'custom_order']
     
 );
 
 // fallback
 $selected_sort = $sort_options[$sort_order] ?? $sort_options['DESC'];
-
-
 $args = array_merge([
     'post_type'      => 'post',
     'posts_per_page' => $posts_per_page,
     'paged'          => $paged,
 ], $selected_sort);
-
-
 $query = new WP_Query($args);
 //end sort order
-
-
 if ($query->have_posts()) :
     echo '<div class="clbgd-grid-wrapper">
     <div class="container">
     <div class="row">';
-
-    while ($query->have_posts()) : $query->the_post(); ?>
-        
+    while ($query->have_posts()) : $query->the_post(); ?> 
         <div class="col-lg-4 col-md-6">
             <div class="clbgd-grid-item">
             <div class="clbgd-grid-item-inner">
@@ -71,47 +53,45 @@ if ($query->have_posts()) :
                     <div class="clbgd-grid-image">
                         <?php the_post_thumbnail('medium'); ?>
                     </div>
-                <?php endif; ?>
-                
+                <?php endif; ?>               
                 <div class="clbgd-grid-content">
-                    <h2 class="clbgd-grid-title clbgd-blog-post-title2">
+                    <h2 class="clbgd-grid-title clbgd-blog-post-tittle-font">
                         <a class="clbgd-blog-post-content2" href="<?php echo esc_url(get_permalink()); ?>" title="<?php echo esc_attr(get_the_title()); ?>">
                             <?php the_title(); ?>
                         </a>
                     </h2>
                     
-                    <div class="clbgd-grid-excerpt clbgd-blog-post-excerpt2">
+                    <div class="clbgd-grid-excerpt clbgd-blog-post-excerpt-font">
                         <?php echo esc_html(wp_trim_words(get_the_excerpt(), $excerpt_length)); ?>
                     </div>
 
                     <div class="clbgd-grid-admin-info">
                         <?php if ($show_date): ?>
-                            <p class="clbgd-grid-date clbgd-blog-post-content2"><?php echo esc_html(get_the_date('F j, Y')); ?></p>
+                            <p class="clbgd-grid-date clbgd-blog-post-meta-font"><?php echo esc_html(get_the_date('F j, Y')); ?></p>
                         <?php endif; ?>
 
                         <?php if ($show_author): ?>
-                            <p class="clbgd-grid-author clbgd-blog-post-content2"><?php echo esc_html__('By', 'classic-blog-grid') . ' ' . esc_html(get_the_author()); ?></p>
+                            <p class="clbgd-grid-author clbgd-blog-post-meta-font"><?php echo esc_html__('By', 'classic-blog-grid') . ' ' . esc_html(get_the_author()); ?></p>
                         <?php endif; ?>
 
                         <?php if ($show_comments): ?>
-                            <p class="clbgd-grid-comments clbgd-blog-post-content2"><?php echo esc_html(get_comments_number()) . ' ' . esc_html__('Comments', 'classic-blog-grid'); ?></p>
+                            <p class="clbgd-grid-comments clbgd-blog-post-meta-font"><?php echo esc_html(get_comments_number()) . ' ' . esc_html__('Comments', 'classic-blog-grid'); ?></p>
                         <?php endif; ?>
 
-                
                     </div>
                     <div class="clbgd-blog-category-title">
                          <?php if ($show_categories): ?>
-                             <p class="clbgd-blog-post-category clbgd-blog-post-content2">
+                             <p class="clbgd-blog-post-category clbgd-blog-post-meta-font">
                                  <?php echo esc_html__('Category: ', 'classic-blog-grid') . wp_kses_post(get_the_category_list(', ')); ?>
                              </p>
                          <?php endif; ?>
-                 </div>
+                    </div>
                     <!-- Show Tags -->
                     <?php if ($show_tags): ?>
                         <?php 
                         $tags = get_the_tags(); 
                         if ($tags): ?>
-                            <p class="clbgd-grid-tags clbgd-blog-post-content2">
+                            <p class="clbgd-grid-tags clbgd-blog-post-meta-font">
                                 <?php foreach ($tags as $tag): ?>
                                     <a href="<?php echo esc_url(get_tag_link($tag->term_id)); ?>">
                                         <?php echo esc_html($tag->name); ?>
@@ -122,10 +102,9 @@ if ($query->have_posts()) :
                     <?php endif; ?>
 
                      <!-- show social share -->
-             
 	             	    <?php if ($show_social_share): ?>
 	             		  <div class="clbgd-social-share-buttons">
-	             			  <span class="clbgd-blog-post-content2"><?php esc_html_e('Share:', 'classic-blog-grid'); ?></span>
+	             			  <span class="clbgd-blog-post-meta-font"><?php esc_html_e('Share:', 'classic-blog-grid'); ?></span>
 	             			  <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_permalink()); ?>" target="_blank" rel="noopener noreferrer">
 	             				  <i class="fab fa-facebook-f"></i>
 	             			  </a>
@@ -140,7 +119,6 @@ if ($query->have_posts()) :
 	             			  </a>
 	             		  </div>
 	             	  <?php endif; ?>
-
 		             <!-- END Social Share Buttons -->
                 </div>
 

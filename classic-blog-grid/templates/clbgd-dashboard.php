@@ -72,15 +72,6 @@
             </div>
         </div>
     </div>
-   
-
-    <!-- <div class="clbgd-postbox">
-    <h2 class="clbgd-hndle"><span>Manage Grids</span></h2>
-    <div class="clbgd-inside">
-        <p><a href="<?php echo esc_url(admin_url('edit.php?post_type=clbgd_grid')); ?>" class="clbgd-button">All Grids</a></p>
-        <p><a href="<?php echo esc_url(admin_url('admin.php?page=clbgd_add_new_grid')); ?>" class="clbgd-button">Add New Grid</a></p>
-    </div>
-    </div> -->
     <div class="clbgd-banner">
      <div class="row align-items-center">
         <div class="col-lg-5 col-md-5">
@@ -99,7 +90,7 @@
      </div>
     </div>
     <footer class="clbgd-plugin-footer">
-        <p>Classic Blog Grid Version 1.0 | Developed by Classic Templatess</p>
+        <p>Classic Blog Grid Version 1.5 | Developed by Classic Templatess</p>
     </footer>
 </div>
 </div>
