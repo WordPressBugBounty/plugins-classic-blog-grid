@@ -1,10 +1,10 @@
 === Classic Blog Grid   ===
 Contributors: classictemplate
 Tags: Blog Display, List Layout, Grid Layout , Classic Blog Grid
-Requires at least: 5.4
+Requires at least: 5.2
 Tested up to: 6.8
-Requires PHP: 5.2.4
-Stable tag: 1.5
+Requires PHP: 7.2
+Stable tag: 1.6
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -73,6 +73,10 @@ enhancing your blog with the Classic Blog Grid Plugin!
 
 
 == Changelog ==
+
+= 1.6 - 2025-05-31 =
+* Minor Fixes.
+* Updated Font Awesome library.
 
 = 1.5 - 2025-05-03 =
 * Minor Fixes.
