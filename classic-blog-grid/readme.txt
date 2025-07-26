@@ -4,7 +4,7 @@ Tags: Blog Display, List Layout, Grid Layout , Classic Blog Grid
 Requires at least: 5.2
 Tested up to: 6.8
 Requires PHP: 7.2
-Stable tag: 1.6
+Stable tag: 1.7
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -73,6 +73,13 @@ enhancing your blog with the Classic Blog Grid Plugin!
 
 
 == Changelog ==
+
+= 1.7 - 2025-07-23 =
+* Added "Show Pagination" toggle in style settings.
+* Added "Image Aspect Ratio" control with multiple layout options.
+* Separated "Include" and "Exclude" filters for categories or tags.
+* Improved post query filtering using `tax_query`.
+* Minor UI adjustments in the admin panel.
 
 = 1.6 - 2025-05-31 =
 * Minor Fixes.

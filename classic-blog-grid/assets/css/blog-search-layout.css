@@ -5,6 +5,8 @@
     margin-bottom: 20px;
 }
 
+.aspect-16-9 { aspect-ratio: 16 / 9; overflow: hidden; }
+.aspect-1-1 { aspect-ratio: 1 / 1; overflow: hidden; }
 
 .clbgd-search-form {
     display: flex;

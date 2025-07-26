@@ -300,6 +300,13 @@ class Clbgd_Core
         $meta_font_color = isset($_POST['meta_font_color']) ? sanitize_hex_color($_POST['meta_font_color']) : '';
         $meta_font_weight = isset($_POST['meta_font_weight']) ? sanitize_text_field($_POST['meta_font_weight']) : '';
 
+
+
+        // new
+        $show_pagination = isset($_POST['show_pagination']) ? '1' : '0';
+        $image_aspect_ratio = sanitize_text_field($_POST['image_aspect_ratio']);
+        $include_exclude_categories = sanitize_text_field($_POST['include_exclude_categories']);
+        // new end
         $post_id = isset($_POST['post_id']) ? intval($_POST['post_id']) : 0;
         $post_data = array(
             'ID' => $post_id,
@@ -331,6 +338,19 @@ class Clbgd_Core
             update_post_meta($post_id, '_clbgd_excerpt_font_weight', $excerpt_font_weight);
             update_post_meta($post_id, '_clbgd_meta_font_color', $meta_font_color);
             update_post_meta($post_id, '_clbgd_meta_font_weight', $meta_font_weight);
+
+
+
+            //new
+            update_post_meta($post_id, '_clbgd_show_pagination', $show_pagination);
+            update_post_meta($post_id, '_clbgd_image_aspect_ratio', $image_aspect_ratio);
+            if (isset($_POST['include_categories_tags'])) {
+                update_post_meta($post_id, '_clbgd_include_categories_tags', sanitize_text_field($_POST['include_categories_tags']));
+            }
+            if (isset($_POST['exclude_categories_tags'])) {
+                update_post_meta($post_id, '_clbgd_exclude_categories_tags', sanitize_text_field($_POST['exclude_categories_tags']));
+            }
+            //new end
         }
 
         wp_redirect(admin_url('edit.php?post_type=clbgd_grid'));

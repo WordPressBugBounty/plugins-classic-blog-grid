@@ -42,6 +42,33 @@ $args = array_merge([
     'paged'          => $paged,
 ], $selected_sort);
 
+$tax_query = [];
+
+$include_slugs = array_filter(array_map('trim', explode(',', $meta_values['include_categories_tags'] ?? '')));
+$exclude_slugs = array_filter(array_map('trim', explode(',', $meta_values['exclude_categories_tags'] ?? '')));
+
+if (!empty($include_slugs)) {
+    $tax_query[] = [
+        'taxonomy' => 'category',
+        'field'    => 'slug',
+        'terms'    => $include_slugs,
+        'operator' => 'IN',
+    ];
+}
+
+if (!empty($exclude_slugs)) {
+    $tax_query[] = [
+        'taxonomy' => 'category',
+        'field'    => 'slug',
+        'terms'    => $exclude_slugs,
+        'operator' => 'NOT IN',
+    ];
+}
+
+if (!empty($tax_query)) {
+    $args['tax_query'] = count($tax_query) > 1 ? array_merge(['relation' => 'AND'], $tax_query) : $tax_query;
+}
+
 $query = new WP_Query($args);
 //end sort order
 
@@ -140,21 +167,24 @@ if ($query->have_posts()) : ?>
     </div>
 </div>
 <?php if ($enable_ajax_masonry == 'disable') : ?>
-<div class="pagination">
-<?php
-    $pagination_links = paginate_links(array(
-        'total' => $query->max_num_pages,
-        'current' => max(1, get_query_var('paged')),
-        'format' => '?paged=%#%',
-        'prev_text' => __('« Previous', 'classic-blog-grid'),
-        'next_text' => __('Next »', 'classic-blog-grid'),
-    ));
+    <?php if (isset($meta_values['show_pagination']) && $meta_values['show_pagination'] === '1') : ?>
+        <div class="pagination">
+        <?php
+            $pagination_links = paginate_links(array(
+                'total' => $query->max_num_pages,
+                'current' => max(1, get_query_var('paged')),
+                'format' => '?paged=%#%',
+                'prev_text' => __('« Previous', 'classic-blog-grid'),
+                'next_text' => __('Next »', 'classic-blog-grid'),
+            ));
+        
+            if (!empty($pagination_links)) {
+                echo wp_kses_post($pagination_links);
+            }
+            ?>
+        </div>
+<?php endif; ?>
 
-    if (!empty($pagination_links)) {
-        echo wp_kses_post($pagination_links);
-    }
-    ?>
-</div>
 <?php endif; ?>
 <!-- end -->
 <!-- Load More Button for dynamic loding products  -->

@@ -79,6 +79,14 @@ class Clbgd_Shortcodes {
             'excerpt_font_weight' => get_post_meta($post_id, '_clbgd_excerpt_font_weight', true) ?: '',
             'meta_font_color' => get_post_meta($post_id, '_clbgd_meta_font_color', true) ?: '#000',
             'meta_font_weight' => get_post_meta($post_id, '_clbgd_meta_font_weight', true) ?: '',
+
+
+            // new
+            'show_pagination' => get_post_meta($post_id, '_clbgd_show_pagination', true) ?: '0',
+            'image_aspect_ratio' => get_post_meta($post_id, '_clbgd_image_aspect_ratio', true) ?: 'auto',
+            'include_categories_tags' => get_post_meta($post_id, '_clbgd_include_categories_tags', true) ?: '',
+            'exclude_categories_tags' => get_post_meta($post_id, '_clbgd_exclude_categories_tags', true) ?: '',
+            // new end         
         );
     }
 

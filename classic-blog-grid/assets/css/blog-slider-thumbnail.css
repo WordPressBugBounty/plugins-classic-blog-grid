@@ -7,6 +7,8 @@
     max-width: 100% !important;
 }
 
+.aspect-16-9 { aspect-ratio: 16 / 9; overflow: hidden; }
+.aspect-1-1 { aspect-ratio: 1 / 1; overflow: hidden; }
 
 .swiper-button-next, .swiper-button-prev {
     color: #fff;

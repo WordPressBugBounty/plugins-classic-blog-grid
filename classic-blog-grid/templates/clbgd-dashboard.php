@@ -90,7 +90,7 @@
      </div>
     </div>
     <footer class="clbgd-plugin-footer">
-        <p>Classic Blog Grid Version 1.5 | Developed by Classic Templatess</p>
+        <p>Classic Blog Grid Version 1.7 | Developed by Classic Templatess</p>
     </footer>
 </div>
 </div>

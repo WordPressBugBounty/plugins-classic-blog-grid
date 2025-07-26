@@ -6,6 +6,11 @@
     max-width: 100% !important;
     padding: 48px 0;
 }
+
+.aspect-16-9 { aspect-ratio: 16 / 9; overflow: hidden; }
+.aspect-1-1 { aspect-ratio: 1 / 1; overflow: hidden; }
+
+
 :where(.wp-site-blocks :focus) {
     outline-width: unset !important;
     outline-style: unset !important;

@@ -688,6 +688,8 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                                value="<?php echo esc_attr($global_font_color); ?>"
                                                 />
                                        </div>
+
+
                                        <!-- new one end for font -->
                                        <div class="styling-customization-row grid-overlay-color-option">
                                           <label for="grid_overlay_color">Grid Overlay Color</label><span class="pro-badge"><i class="fa fa-crown"></i> PRO</span>
@@ -696,6 +698,61 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                        </div>
                                     </div>
                                    
+                                
+                                    <!-- new -->
+                                    <!-- Show Pagination -->
+                                    <div class="styling-customization-row-box">
+                                    <div class="styling-customization-row show-pagination-option">
+                                        <label for="show_pagination"><?php esc_html_e('Show Pagination', 'classic-blog-grid'); ?></label>
+                                        <span class="pro-badge">Free</span>
+                                        <input type="checkbox" name="show_pagination" id="show_pagination" value="1"
+                                            <?php checked(get_post_meta($post_id, '_clbgd_show_pagination', true), '1'); ?> />
+                                        <label for="show_pagination"><?php esc_html_e('Enable pagination for post navigation.', 'classic-blog-grid'); ?></label>
+                                       
+                                    </div>
+                                    </div>
+
+                                    <!-- Image Aspect Ratio -->
+                                    <div class="styling-customization-row-box">
+                                    <div class="styling-customization-row image-aspect-ratio-option">
+                                        <label for="image_aspect_ratio"><?php esc_html_e('Image Aspect Ratio', 'classic-blog-grid'); ?></label>
+                                        <span class="pro-badge">Free</span>
+                                        
+                                            <select name="image_aspect_ratio" id="image_aspect_ratio">
+                                                <?php $selected_ratio = get_post_meta($post_id, '_clbgd_image_aspect_ratio', true); ?>
+                                                <option value="auto" <?php selected($selected_ratio, 'auto'); ?>><?php esc_html_e('Auto', 'classic-blog-grid'); ?></option>
+                                                <option value="1-1" <?php selected($selected_ratio, '1-1'); ?>>1:1</option>
+                                                <option value="16-9" <?php selected($selected_ratio, '16-9'); ?>>16:9</option>
+                                                <option value="4-3" <?php selected($selected_ratio, '4-3'); ?>>4:3</option>
+                                            </select>
+                                      
+                                    </div>
+                                    </div>
+
+
+                                    <!-- Include Categories or Tags -->
+                                    <div class="styling-customization-row-box">
+                                        <div class="styling-customization-row include-categories-option">
+                                            <label for="include_categories_tags"><?php esc_html_e('Include Categories or Tags', 'classic-blog-grid'); ?></label>
+                                            <span class="pro-badge">Free</span>
+                                            <textarea name="include_categories_tags" id="include_categories_tags" rows="3" class="large-text"><?php echo esc_textarea(get_post_meta($post_id, '_clbgd_include_categories_tags', true)); ?></textarea>
+                                            <p class="description mx-2"><?php esc_html_e('Enter category or tag slugs to include, separated by commas. E.g., news,tech', 'classic-blog-grid'); ?></p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Exclude Categories or Tags -->
+                                    <div class="styling-customization-row-box">
+                                        <div class="styling-customization-row exclude-categories-option">
+                                            <label for="exclude_categories_tags"><?php esc_html_e('Exclude Categories or Tags', 'classic-blog-grid'); ?></label>
+                                            <span class="pro-badge">Free</span>
+                                            <textarea name="exclude_categories_tags" id="exclude_categories_tags" rows="3" class="large-text"><?php echo esc_textarea(get_post_meta($post_id, '_clbgd_exclude_categories_tags', true)); ?></textarea>
+                                            <p class="description mx-2"><?php esc_html_e('Enter category or tag slugs to exclude, separated by commas. E.g., uncategorized,ads', 'classic-blog-grid'); ?></p>
+                                        </div>
+                                    </div>
+
+
+
+
                                 </div>
                             </div>
 
@@ -721,6 +778,10 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
 
                         </td>
                     </tr>
+
+
+
+                   
                     <!-- end -->
                 </table>
                 <?php submit_button($post_id ? esc_html__('Update Grid', 'classic-blog-grid') : esc_html__('Add Grid', 'classic-blog-grid')); ?>

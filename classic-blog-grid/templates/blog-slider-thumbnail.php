@@ -40,6 +40,33 @@ $args = array_merge([
     'paged'          => $paged,
 ], $selected_sort);
 
+$tax_query = [];
+
+$include_slugs = array_filter(array_map('trim', explode(',', $meta_values['include_categories_tags'] ?? '')));
+$exclude_slugs = array_filter(array_map('trim', explode(',', $meta_values['exclude_categories_tags'] ?? '')));
+
+if (!empty($include_slugs)) {
+    $tax_query[] = [
+        'taxonomy' => 'category',
+        'field'    => 'slug',
+        'terms'    => $include_slugs,
+        'operator' => 'IN',
+    ];
+}
+
+if (!empty($exclude_slugs)) {
+    $tax_query[] = [
+        'taxonomy' => 'category',
+        'field'    => 'slug',
+        'terms'    => $exclude_slugs,
+        'operator' => 'NOT IN',
+    ];
+}
+
+if (!empty($tax_query)) {
+    $args['tax_query'] = count($tax_query) > 1 ? array_merge(['relation' => 'AND'], $tax_query) : $tax_query;
+}
+
 $blog_posts = new WP_Query($args);
 if ($blog_posts->have_posts()) : ?>
 <!-- Main Swiper (Large Slider) -->
@@ -50,8 +77,14 @@ if ($blog_posts->have_posts()) : ?>
             <div class="blog-slide">
                 <!-- Display Featured Image -->
                 <?php if (has_post_thumbnail()) : ?>
+                    <?php
+                    $image_aspect_class = '';
+                    if (!empty($meta_values['image_aspect_ratio'])) {
+                        $image_aspect_class = 'aspect-' . esc_attr($meta_values['image_aspect_ratio']); // e.g., 16-9, 1-1
+                    }
+                    ?>
                 <img src="<?php the_post_thumbnail_url('large'); ?>" alt="<?php the_title(); ?>"
-                    class="main-slide-image">
+                    class="main-slide-image <?php echo esc_attr($image_aspect_class); ?>">
                 <?php else : ?>
                 <img src="" alt="No Image" class="main-slide-image">
                 <?php endif; ?>
@@ -138,7 +171,10 @@ if ($blog_posts->have_posts()) : ?>
                     <div class="swiper-button-prev"></div>
                 </div>
                 <!-- Pagination -->
-                <div class="swiper-pagination"></div>
+                <?php if (isset($meta_values['show_pagination']) && $meta_values['show_pagination'] === '1') : ?>
+                    <div class="swiper-pagination"></div>
+                <?php endif; ?>
+
                 <!-- end -->
             </div>
         </div>

@@ -40,6 +40,32 @@ $args = array_merge([
     'paged'          => $paged,
 ], $selected_sort);
 
+$tax_query = [];
+
+$include_slugs = array_filter(array_map('trim', explode(',', $meta_values['include_categories_tags'] ?? '')));
+$exclude_slugs = array_filter(array_map('trim', explode(',', $meta_values['exclude_categories_tags'] ?? '')));
+
+if (!empty($include_slugs)) {
+    $tax_query[] = [
+        'taxonomy' => 'category',
+        'field'    => 'slug',
+        'terms'    => $include_slugs,
+        'operator' => 'IN',
+    ];
+}
+
+if (!empty($exclude_slugs)) {
+    $tax_query[] = [
+        'taxonomy' => 'category',
+        'field'    => 'slug',
+        'terms'    => $exclude_slugs,
+        'operator' => 'NOT IN',
+    ];
+}
+
+if (!empty($tax_query)) {
+    $args['tax_query'] = count($tax_query) > 1 ? array_merge(['relation' => 'AND'], $tax_query) : $tax_query;
+}
 
 $query = new WP_Query($args);
 //end sort order
@@ -152,9 +178,11 @@ if ($query->have_posts()) : ?>
         <div class="swiper-button-next"></div>
 
     </div>
+    <?php if (isset($meta_values['show_pagination']) && $meta_values['show_pagination'] === '1') : ?>
+        <div class="swiper-pagination"></div>
+    <?php endif; ?>
 
     <!-- Pagination -->
-    <div class="swiper-pagination"></div>
 </div>
 <?php else : ?>
 <p>No posts found.</p>

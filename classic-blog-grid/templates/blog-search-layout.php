@@ -31,6 +31,33 @@ if (!empty($search_query)) {
     $args['s'] = $search_query; // Add search filter
 }
 
+$tax_query = [];
+
+$include_slugs = array_filter(array_map('trim', explode(',', $meta_values['include_categories_tags'] ?? '')));
+$exclude_slugs = array_filter(array_map('trim', explode(',', $meta_values['exclude_categories_tags'] ?? '')));
+
+if (!empty($include_slugs)) {
+    $tax_query[] = [
+        'taxonomy' => 'category',
+        'field'    => 'slug',
+        'terms'    => $include_slugs,
+        'operator' => 'IN',
+    ];
+}
+
+if (!empty($exclude_slugs)) {
+    $tax_query[] = [
+        'taxonomy' => 'category',
+        'field'    => 'slug',
+        'terms'    => $exclude_slugs,
+        'operator' => 'NOT IN',
+    ];
+}
+
+if (!empty($tax_query)) {
+    $args['tax_query'] = count($tax_query) > 1 ? array_merge(['relation' => 'AND'], $tax_query) : $tax_query;
+}
+
 $query = new WP_Query($args);
 ?>
 <div class="container">
@@ -61,7 +88,13 @@ $query = new WP_Query($args);
         <div class="col-lg-6">
             <div class="clbgd-blog-grid-item">
                 <?php if ($enable_featured_image !== 'disable' && has_post_thumbnail()) : ?>
-                    <div class="clbgd-blog-grid-image">
+                    <?php
+                    $image_aspect_class = '';
+                    if (!empty($meta_values['image_aspect_ratio'])) {
+                        $image_aspect_class = 'aspect-' . esc_attr($meta_values['image_aspect_ratio']); // e.g., 16-9, 1-1
+                    }
+                    ?>
+                    <div class="clbgd-blog-grid-image <?php echo esc_attr($image_aspect_class); ?>">
                         <a href="<?php the_permalink(); ?>">
                             <?php the_post_thumbnail('medium'); ?>
                         </a>
@@ -146,21 +179,24 @@ $query = new WP_Query($args);
     </div>
     </div>
     <!-- Pagination -->
-    <?php if ($query->max_num_pages > 1) : ?>
-        <div class="clbgd-pagination">
-            <?php
-            echo wp_kses_post(paginate_links(array(
-                'base'      => str_replace(99999, '%#%', esc_url(get_pagenum_link(99999))),
-                'format'    => '?paged=%#%',
-                'total'     => $query->max_num_pages,
-                'current'   => max(1, $paged),
-                'prev_text' => __('« Previous', 'classic-blog-grid'),
-                'next_text' => __('Next »', 'classic-blog-grid'),
-                'add_args'  => array('s' => $search_query),
-            )));
-            ?>
-        </div>
-    <?php endif; ?>
+    <?php if (isset($meta_values['show_pagination']) && $meta_values['show_pagination'] === '1') : ?>
+        <?php if ($query->max_num_pages > 1) : ?>
+            <div class="clbgd-pagination">
+                <?php
+                echo wp_kses_post(paginate_links(array(
+                    'base'      => str_replace(99999, '%#%', esc_url(get_pagenum_link(99999))),
+                    'format'    => '?paged=%#%',
+                    'total'     => $query->max_num_pages,
+                    'current'   => max(1, $paged),
+                    'prev_text' => __('« Previous', 'classic-blog-grid'),
+                    'next_text' => __('Next »', 'classic-blog-grid'),
+                    'add_args'  => array('s' => $search_query),
+                )));
+                ?>
+            </div>
+        <?php endif; ?>
+<?php endif; ?>
+
 <?php else : ?>
     <p class="clbgd-no-posts"><?php esc_html_e('No posts found.', 'classic-blog-grid'); ?></p>
 <?php endif; ?>

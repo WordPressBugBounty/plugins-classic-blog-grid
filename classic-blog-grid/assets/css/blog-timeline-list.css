@@ -10,6 +10,9 @@ a{
   text-decoration: none !important;
 }
 
+.aspect-16-9 { aspect-ratio: 16 / 9; overflow: hidden; }
+.aspect-1-1 { aspect-ratio: 1 / 1; overflow: hidden; }
+
 /* The Dot for Timeline */
 .clbgd-timeline-dot {
     position: absolute;
