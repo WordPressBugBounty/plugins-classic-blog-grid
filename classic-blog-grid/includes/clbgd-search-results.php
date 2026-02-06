@@ -8,6 +8,7 @@ $show_date = isset($_POST['show_date']) ? filter_var($_POST['show_date'], FILTER
 $show_author = isset($_POST['show_author']) ? filter_var($_POST['show_author'], FILTER_VALIDATE_BOOLEAN) : false;
 $show_comments = isset($_POST['show_comments']) ? filter_var($_POST['show_comments'], FILTER_VALIDATE_BOOLEAN) : false;
 $show_excerpt = isset($_POST['show_excerpt']) ? filter_var($_POST['show_excerpt'], FILTER_VALIDATE_BOOLEAN) : false;
+$show_read_more = isset($_POST['show_read_more']) ? filter_var($_POST['show_read_more'], FILTER_VALIDATE_BOOLEAN) : false;
 $excerpt_length = isset($_POST['excerpt_length']) ? intval($_POST['excerpt_length']) : 15;
 $show_categories = isset($_POST['show_categories']) ? filter_var($_POST['show_categories'], FILTER_VALIDATE_BOOLEAN) : false;
 $enable_featured_image = isset($_POST['enable_featured_image']) ? sanitize_text_field($_POST['enable_featured_image']) : 'enable';

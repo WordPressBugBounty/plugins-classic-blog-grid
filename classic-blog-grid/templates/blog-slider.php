@@ -8,7 +8,10 @@ $show_date = $meta_values['show_date'];
 $show_author = $meta_values['show_author'];
 $show_comments = $meta_values['show_comments'];
 $show_excerpt = $meta_values['show_excerpt'];
-$excerpt_length = $meta_values['excerpt_length'] ?: 15; 
+$show_read_more = $meta_values['show_read_more'];
+$excerpt_length = $meta_values['excerpt_length'] ?: 15;
+$title_length = $meta_values['title_length'];
+$custom_read_more_text = $meta_values['custom_read_more_text'];
 $show_categories = $meta_values['show_categories'];
 $enable_featured_image = $meta_values['enable_featured_image'];
 $show_social_share = $meta_values['show_social_share'];
@@ -88,7 +91,7 @@ if ($query->have_posts()) : ?>
                 <!-- Slide Content -->
                 <h2 class="clbgd-slide-title clbgd-blog-post-tittle-font">
                 <a class="clbgd-blog-post-tittle-font" href="<?php echo esc_url(get_permalink()); ?>" title="<?php echo esc_attr(get_the_title()); ?>">
-                        <?php the_title(); ?>
+                        <?php echo $title_length ? esc_html(wp_trim_words(get_the_title(), $title_length)) : esc_html(get_the_title()); ?>
                     </a></h2>
                 <div class="clbgd-meta-slide">
                     <?php if ($show_date): ?>
@@ -161,8 +164,10 @@ if ($query->have_posts()) : ?>
                 <?php endif; ?>
 
                 <!-- END Social Share Buttons -->
+                <?php if ($show_read_more): ?>
+                <a href="<?php the_permalink(); ?>" class="clbgd-slide-button clbgd-blog-post-content2 clbgd-button"><?php echo esc_html($custom_read_more_text); ?></a>
+                <?php endif; ?>
 
-                <a href="<?php the_permalink(); ?>" class="clbgd-slide-button clbgd-blog-post-content2">Learn More</a>
             
 
             </div>

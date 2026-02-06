@@ -99,7 +99,7 @@
                     <img class="w-100" src="<?php echo esc_url(CLBGD_PLUGIN_URL . 'assets/images/template-banner.png'); ?>" alt="<?php esc_attr_e('List Layout', 'classic-blog-grid'); ?>">     
                     <div class="clbgd-tem-content-wrap d-flex flex-column gap-3 text-center">
                         <h3 class="clbgd-tem-content-banner-heading">WordPress Theme Bundle</h3>
-                        <p class="clbgd-tem-content-banner-para">Discover the WordPress Theme Bundle from The Classic Templates with 85+ stunning themes for any niche!</p>
+                        <p class="clbgd-tem-content-banner-para">Discover the WordPress Theme Bundle from The Classic Templates with 100+ stunning themes for any niche!</p>
                         <div class="clbgd-banner-price-wrap d-flex justify-content-center gap-3">
                             <h6>Price:</h6>
                             <h6 class="decorative-price position-relative">$2,045</h6>
@@ -108,7 +108,7 @@
                         <div class="clbgd-tem-banner-points row">
                             <div class="col-lg-6 col-md-12 col-sm-12 col-12">
                                 <div class="d-flex flex-column gap-2">
-                                    <p class="gap-2 d-flex align-items-center"><img class="check-icon" src="<?php echo esc_url(CLBGD_PLUGIN_URL . 'assets/images/check.svg'); ?>" alt="<?php esc_attr_e('check', 'classic-blog-grid'); ?>"> 85+ Professionally Themes</p>
+                                    <p class="gap-2 d-flex align-items-center"><img class="check-icon" src="<?php echo esc_url(CLBGD_PLUGIN_URL . 'assets/images/check.svg'); ?>" alt="<?php esc_attr_e('check', 'classic-blog-grid'); ?>"> 100+ Professionally Themes</p>
                                     <p class="gap-2 d-flex align-items-center"><img class="check-icon" src="<?php echo esc_url(CLBGD_PLUGIN_URL . 'assets/images/check.svg'); ?>" alt="<?php esc_attr_e('check', 'classic-blog-grid'); ?>"> Fully Responsive Design</p>
                                     <p class="gap-2 d-flex align-items-center"><img  class="check-icon" src="<?php echo esc_url(CLBGD_PLUGIN_URL . 'assets/images/check.svg'); ?>" alt="<?php esc_attr_e('check', 'classic-blog-grid'); ?>"> Easy Customization Tools</p>
                                 </div>

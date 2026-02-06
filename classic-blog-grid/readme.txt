@@ -1,10 +1,10 @@
 === Classic Blog Grid   ===
 Contributors: classictemplate
-Tags: Blog Display, List Layout, Grid Layout , Classic Blog Grid
+Tags: blog, blog-display, grid-layout, post-grid, post-slider
 Requires at least: 5.2
 Tested up to: 6.8
 Requires PHP: 7.2
-Stable tag: 1.7
+Stable tag: 1.9
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,30 +12,91 @@ Classic Blog Grid : A plugin to display blog posts in various grid formats: list
 
 == Description ==
 
-The Classic Blog Grid plugin offers an easy and flexible solution to display your WordPress blog posts in stylish, customizable grid layouts. Whether you want to showcase your content in a traditional list format or with a modern, dynamic grid, this plugin provides everything you need to make your blog visually appealing and user-friendly. With three unique grid layout types—List, Masonry, and Slider—Classic Blog Grid adapts to all screen sizes, ensuring your site looks great on any device.
+The **Classic Blog Grid** plugin by ClassicTemplate is the ultimate solution to give your WordPress blog a modern, elegant, and visually engaging layout. Whether you run a personal blog, a magazine site, or a content-rich business page, this plugin lets you showcase your posts beautifully with multiple layout styles and easy customization options.
 
-This plugin is fully responsive, allowing your visitors to have an optimized browsing experience on desktops, tablets, and smartphones. You can customize grid spacing and color schemes to match your website’s design, while smooth animations bring your blog posts to life, offering an engaging user experience.
+With just a few clicks, you can transform your default blog page into a dynamic grid-based showcase that fits your brand’s personality. The plugin offers multiple blog layout styles, typography settings, metadata controls, and pagination options — all without needing a single line of code.
 
-Classic Blog Grid seamlessly integrates with any WordPress theme, making it an ideal choice for users looking to add an attractive blog grid without complex configuration or coding. Whether you're showcasing images, post excerpts, or any other type of content, Classic Blog Grid supports multiple content formats, making it the perfect addition to any blog or content-driven site.
+It’s built to be lightweight, fully responsive, and SEO-friendly, ensuring your blog loads fast and looks perfect on every device, from desktops to smartphones.
 
-== Key Features ==
+**Beautiful Blog Layout Options**
 
-* 3 Grid Layout Types: Choose from List, Masonry, or Slider grid layouts for flexible content presentation.
-  
-* Fully Responsive: Ensures your blog looks great on any device, from mobile phones to desktops.
+Classic Blog Grid gives you a variety of blog layouts to match your design needs and creative vision.
 
-* Customizable Spacing & Colors: Tailor the grid’s appearance to fit your website’s design with adjustable grid spacing and color options.
-  
-* Smooth Animations: Add polished, smooth transitions for a professional touch on grid interactions.
-  
-* Content Support: Display images, excerpts, and more in your grids, making it easy to showcase different types of content.
-  
-* Seamless Integration: Works effortlessly with all WordPress themes for a consistent look across your site.
-  
-* Easy Shortcode Generation: Generate shortcodes for your selected grid layout with a click, and insert them into any page, post, or widget.
-  
+== Free Layouts: ==
 
-Elevate your blog’s look and feel with Classic Blog Grid – the ideal plugin for creating stunning and customizable blog layouts with zero hassle!
+* **List Layout:** A traditional vertical layout ideal for simple and classic blog designs.
+* **Masonry Layout:** A flexible, Pinterest-like grid that automatically adjusts post heights for a modern feel.
+* **Slider Layout:** A stylish, auto-sliding format that highlights your featured posts.
+
+==Pro Layouts (Available in Classic Blog Grid Pro):==
+
+* **Slider Thumbnail Layout:** Showcase posts with a sleek thumbnail navigation slider.
+* **Grid Box Layout:** Perfect for uniform post displays with neat, boxed alignment.
+* **Grid with Search Bar Layout:** Let visitors quickly search posts within your grid layout.
+* **Grid with Category Tab Layout:** Add category tabs for interactive post filtering.
+* **Carousel Layout:** Display your posts in a continuous, rotating carousel format.
+* **Alternate List Layout:** Alternate image and content placement for visual diversity.
+* **Timeline Layout:** Present your posts in a chronological, visually stunning timeline format.
+* **List with Category Sidebar Layout:** Add a category sidebar filter to improve content navigation.
+
+Each layout is designed to adapt seamlessly to all screen sizes, ensuring a smooth browsing experience across devices.
+
+With these settings, you can design a blog layout that’s not only visually appealing but also perfectly aligned with your website’s branding.
+
+==💎 Upgrade to Classic Blog Grid Pro==
+
+Take your blog to the next level with Classic Blog Grid Pro, the premium version that unlocks all advanced layouts, animations, and customization features.
+
+With the Pro version, you get access to 8+ additional layouts, typography styling options, overlay controls, AJAX filters, and more. It’s ideal for professional bloggers, magazine sites, and content creators who want full control over their presentation.
+
+==Classic Blog Grid Pro includes:==
+
+* Premium layouts: Timeline, Carousel, Grid with Tabs, and more
+* Font and typography customization
+* Grid overlay and hover effects
+* Advanced slider animations
+* AJAX-powered category filters
+* Custom CSS integration
+* Social sharing and tag display options
+
+**👉 Get Classic Blog Grid Pro for just $15:**
+[https://www.theclassictemplates.com/products/classic-blog-grid-pro](https://www.theclassictemplates.com/products/classic-blog-grid-pro)
+
+**🌟 Why Choose Classic Blog Grid?**
+
+Classic Blog Grid stands out because it combines style, simplicity, and performance.
+
+==Here’s why users love it:==
+* Fully responsive on all devices
+* Compatible with all WordPress themes
+* SEO-friendly and optimized for performance
+* Lightweight and fast-loading design
+* Easy setup — no coding knowledge required
+* Smooth animations and clean layouts
+* Perfect for blogs, news sites, and portfolio pages
+
+Whether you’re starting a new blog or redesigning your current one, Classic Blog Grid provides everything you need to make your posts shine.
+
+**🎁 Recommended Themes**
+
+To make your blog design even more stunning, explore the **Best WordPress Templates Collection** from ClassicTemplate. These pre-designed themes come with built-in blog layouts that pair beautifully with the Classic Blog Grid plugin.
+
+**👉 Browse the collection:**
+[https://www.theclassictemplates.com/collections/best-wordpress-templates](https://www.theclassictemplates.com/collections/best-wordpress-templates)
+
+== Frequently Asked Questions ==
+
+= Is Classic Blog Grid compatible with all themes? =
+Yes, it works perfectly with all WordPress themes, including both free and premium ones.
+= How can I upgrade to the Pro version? =
+Simply purchase it from [Classic Blog Grid Pro](https://www.theclassictemplates.com/products/classic-blog-grid-pro) and unlock all premium features.
+= Can I change the fonts and colors of my blog grid? =
+Yes, the free version allows basic color customization, while the Pro version includes advanced
+typography controls.
+= Does it support AJAX filters and search? =
+Yes, the Pro version adds AJAX category filters and an integrated search bar.
+= Is it mobile-friendly? =
+Absolutely! All layouts are fully responsive and optimized for mobile and tablet devices.
 
 == Installation ==
 
@@ -73,6 +134,15 @@ enhancing your blog with the Classic Blog Grid Plugin!
 
 
 == Changelog ==
+
+= 1.9 - 2025-12-25 =
+* Added option to customize **"Read More" button text**.
+* Added **Post Title Max Length** option.
+
+= 1.8 - 2025-10-22 =
+* Added styling options for **Button Background Color** and **Button Hover Color** for enhanced customization.
+* Updated **Meta Options** for more flexible post metadata display.
+* Minor Dashboard UI Fixes.
 
 = 1.7 - 2025-07-23 =
 * Added "Show Pagination" toggle in style settings.

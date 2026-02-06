@@ -7,7 +7,9 @@ $show_date = $meta_values['show_date'];
 $show_author = $meta_values['show_author'];
 $show_comments = $meta_values['show_comments'];
 $show_excerpt = $meta_values['show_excerpt'];
+$show_read_more = $meta_values['show_read_more'];
 $excerpt_length = $meta_values['excerpt_length'] ?: 15; 
+$title_length = $meta_values['title_length'];
 $show_categories = $meta_values['show_categories'];
 $enable_featured_image = $meta_values['enable_featured_image'];
 $show_social_share = $meta_values['show_social_share'];
@@ -91,7 +93,7 @@ if ($query->have_posts()) :
                 <!-- new one add for font check -->
                 <h2 class="clbgd-blog-post-title clbgd-blog-post-tittle-font">
                     <a class="clbgd-blog-post-tittle-font" href="<?php echo esc_url(get_permalink()); ?>" title="<?php echo esc_attr(get_the_title()); ?>">
-                        <?php the_title(); ?>
+                        <?php echo $title_length ? esc_html(wp_trim_words(get_the_title(), $title_length)) : esc_html(get_the_title()); ?>
                     </a>
                 </h2>
                 <div class="clbgd-blog-category-title">
@@ -163,10 +165,12 @@ if ($query->have_posts()) :
                 </div>
                 <?php endif; ?>
                 <!-- END Social Share Buttons -->
+                <?php if ($show_read_more): ?>
                 <div class=" clbgd-list-button-box">
                     <a href="<?php echo esc_url(get_permalink()); ?>"
-                        class="clbgd-read-more-btn clbgd-blog-post-content2"><?php esc_html_e('Read More', 'classic-blog-grid'); ?></a>
+                        class="clbgd-read-more-btn clbgd-blog-post-content2 clbgd-button"><?php echo esc_html($meta_values['custom_read_more_text']); ?></a>
                 </div>
+                <?php endif; ?>
     </div>
 </div>
 </div>

@@ -80,7 +80,7 @@
         <div class="col-lg-7 col-md-7">
             <div class="clbgd-content-wrap d-flex flex-column gap-3 text-center">
                 <h3 class="clbgd-banner-heading">WordPress Theme Bundle </h3>
-                <p class="clbgd-banner-para">Discover the WordPress Theme Bundle from The Classic Templates with 85+ stunning themes for any niche!</p>
+                <p class="clbgd-banner-para">Discover the WordPress Theme Bundle from The Classic Templates with 100+ stunning themes for any niche!</p>
                 <div class="clbgd-banner-btn-wrap">
                     <a href="<?php echo esc_url( CLBGD_SERVER_URL . 'products/wordpress-theme-bundle' ); ?>" target="_blank" class="clbgd-banner-btn clbgd-btn">Purchase Now</a>
                     <a href="<?php echo esc_url( CLBGD_SERVER_URL . 'collections/best-wordpress-templates' ); ?>" target="_blank" class="clbgd-banner-btn clbgd-btn">Live Preview</a>
@@ -90,7 +90,7 @@
      </div>
     </div>
     <footer class="clbgd-plugin-footer">
-        <p>Classic Blog Grid Version 1.7 | Developed by Classic Templatess</p>
+        <p>Classic Blog Grid Version <?php echo CLBGD_PLUGIN_VERSION; ?> | Developed by Classic Templates</p>
     </footer>
 </div>
 </div>

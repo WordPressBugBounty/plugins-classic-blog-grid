@@ -3,7 +3,7 @@
  * Plugin Name:       Classic Blog Grid
  * Plugin URI:        https://www.theclassictemplates.com/products/classic-blog-grid-pro
  * Description:       A plugin to display blog posts in various grid formats: list, masonry, and slider.
- * Version:           1.7
+ * Version:           1.9
  * Requires at least: 5.2
  * Requires PHP:      7.2
  * Author:            classictemplate
@@ -13,28 +13,30 @@
  * Text Domain:       classic-blog-grid
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; 
+if (!defined('ABSPATH')) {
+    exit;
 }
 
-define( 'CLBGD_PLUGIN_VERSION', '1.7' );
+define('CLBGD_PLUGIN_VERSION', '1.9');
 
-define( 'CLBGD_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-define( 'CLBGD_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-define( 'CLBGD_API_URL', 'https://license.theclassictemplates.com/api/public/' );
-define( 'CLBGD_SERVER_URL', 'https://www.theclassictemplates.com/' );
+define('CLBGD_PLUGIN_DIR', plugin_dir_path(__FILE__));
+define('CLBGD_PLUGIN_URL', plugin_dir_url(__FILE__));
+define('CLBGD_API_URL', 'https://license.theclassictemplates.com/api/public/');
+define('CLBGD_SERVER_URL', 'https://www.theclassictemplates.com/');
 
 require_once CLBGD_PLUGIN_DIR . 'global-functions.php';
 require_once CLBGD_PLUGIN_DIR . 'includes/class-classic-blog-grid-core.php';
 
-function clbgd_init() {
+function clbgd_init()
+{
     $clbgd_instance = Clbgd_Core::instance();
     $clbgd_instance->init();
 }
-add_action( 'plugins_loaded', 'clbgd_init' );
+add_action('plugins_loaded', 'clbgd_init');
 
 //new added for fontawsome 
-function clbgd_detect_shortcode($posts) {
+function clbgd_detect_shortcode($posts)
+{
     if (empty($posts)) {
         return $posts;
     }
@@ -56,7 +58,8 @@ function clbgd_detect_shortcode($posts) {
 }
 add_filter('the_posts', 'clbgd_detect_shortcode');
 
-function clbgd_enqueue_swiper_assets() {
+function clbgd_enqueue_swiper_assets()
+{
     wp_enqueue_style(
         'swiper-css',
         CLBGD_PLUGIN_URL . 'assets/lib/css/swiper-bundle.min.css',
@@ -76,5 +79,5 @@ function clbgd_enqueue_swiper_assets() {
     wp_enqueue_script('classic-blog-boot-css-js', CLBGD_PLUGIN_URL . 'assets/js/bootstrap.bundle.min.js', ['jquery'], CLBGD_PLUGIN_VERSION, true);
 
     wp_enqueue_style('font-awesome', CLBGD_PLUGIN_URL . 'assets/lib/css/fontawesome-all.min.css', array(), CLBGD_PLUGIN_VERSION);
-    
+
 }

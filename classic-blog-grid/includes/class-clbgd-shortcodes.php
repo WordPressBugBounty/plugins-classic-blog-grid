@@ -56,7 +56,10 @@ class Clbgd_Shortcodes {
             'show_date'          => get_post_meta($post_id, '_clbgd_show_date', true),
             'show_author'        => get_post_meta($post_id, '_clbgd_show_author', true),
             'show_excerpt'       => get_post_meta($post_id, '_clbgd_show_excerpt', true),
+            'show_read_more'       => get_post_meta($post_id, '_clbgd_show_read_more', true),
+            'custom_read_more_text' => get_post_meta($post_id, '_clbgd_custom_read_more_text', true) ?: 'Read More',
             'excerpt_length'     => get_post_meta($post_id, '_clbgd_excerpt_length', true),
+            'title_length'       => get_post_meta($post_id, '_clbgd_title_length', true),
             'show_categories'    => get_post_meta($post_id, '_clbgd_show_categories', true),
             'show_comments'      => get_post_meta($post_id, '_clbgd_show_comments', true),
             'posts_per_row'      => get_post_meta($post_id, '_clbgd_posts_per_row', true),
@@ -71,6 +74,11 @@ class Clbgd_Shortcodes {
             'show_tags'        => get_post_meta($post_id, '_clbgd_show_tags', true) ?: '',
             'show_social_share'        => get_post_meta($post_id, '_clbgd_show_social_share', true),
             'font_color' => get_post_meta($post_id, '_clbgd_global_font_color', true) ?: '#000',
+
+            'button_bg_color' => get_post_meta($post_id, '_clbgd_global_button_bg_color', true) ?: '#3db6ff',
+            'button_hover_bg_color' => get_post_meta($post_id, '_clbgd_global_button_hover_bg_color', true) ?: '#333',
+
+
             'grid_overlay_color' => get_post_meta($post_id, '_clbgd_grid_overlay_color', true) ?: '#000',
             'tittle_font_color' => get_post_meta($post_id, '_clbgd_tittle_font_color', true) ?: '#000',
             'tittle_hover_color' => get_post_meta($post_id, '_clbgd_tittle_hover_color', true) ?: '#428fff',
@@ -124,6 +132,15 @@ class Clbgd_Shortcodes {
         }
         .clbgd-blog-post-content2 a { 
             color: " . esc_attr($meta_values['font_color']) . " ; 
+        }
+
+        .clbgd-button { 
+            background-color: " . esc_attr($meta_values['button_bg_color']) . "!important;
+            color: " . esc_attr($meta_values['font_color']) . "!important;
+        }
+      
+        .clbgd-button:hover { 
+            background-color: " . esc_attr($meta_values['button_hover_bg_color']) . "!important;
         }
 
         .clbgd-blog-post-tittle-font { 

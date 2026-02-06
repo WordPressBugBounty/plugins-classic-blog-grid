@@ -228,6 +228,7 @@ class Clbgd_Core
         $show_excerpt = 1;
         $excerpt_length = 15;
         $show_categories = 0;
+        $show_read_more = 1;
         $posts_per_row = 3;
 
         if ($post_id) {
@@ -243,11 +244,16 @@ class Clbgd_Core
                 $excerpt_length = get_post_meta($post_id, '_clbgd_excerpt_length', true);
                 $show_categories = get_post_meta($post_id, '_clbgd_show_categories', true) ?: 0;
                 $show_comments = get_post_meta($post_id, '_clbgd_show_comments', true) ?: 0;
+                $show_read_more = get_post_meta($post_id, '_clbgd_show_read_more', true);
+                $custom_read_more_text = get_post_meta($post_id, '_clbgd_custom_read_more_text', true) ?: 'Read More';
+                $title_length = get_post_meta($post_id, '_clbgd_title_length', true);
                 $posts_per_row = get_post_meta($post_id, '_clbgd_posts_per_row', true) ?: 3;
                 $enable_featured_image = get_post_meta($post_id, '_clbgd_enable_featured_image', true);
                 $enable_ajax_masonry = get_post_meta($post_id, '_clbgd_enable_ajax_masonry', true);
                 $slider_animation = get_post_meta($post_id, '_clbgd_slider_animation', true) ?: 'fade';
                 $global_font_color = get_post_meta($post_id, '_clbgd_global_font_color', true);
+                $global_button_bg_color = get_post_meta($post_id, '_clbgd_global_button_bg_color', true) ?: '#3db6ff';
+                $global_button_hover_bg_color = get_post_meta($post_id, '_clbgd_global_button_hover_bg_color', true) ?: '#3db6ff';
                 $grid_overlay_color = get_post_meta($post_id, '_clbgd_grid_overlay_color', true);
                 //new
                 $tittle_font_color = get_post_meta($post_id, '_clbgd_tittle_font_color', true);
@@ -276,20 +282,25 @@ class Clbgd_Core
             wp_die_esc_html((__('Insufficient permissions.', 'classic-blog-grid')));
         }
 
-        $grid_title = sanitize_text_field($_POST['grid_title']);
-        $grid_layout = sanitize_text_field($_POST['grid_layout']);
+        $grid_title = isset($_POST['grid_title']) ? sanitize_text_field($_POST['grid_title']) : '';
+        $grid_layout = isset($_POST['grid_layout']) ? sanitize_text_field($_POST['grid_layout']) : 'list';
         $posts_per_page = isset($_POST['posts_per_page']) ? intval($_POST['posts_per_page']) : 10;
-        $sort_order = sanitize_text_field($_POST['sort_order']);
+        $sort_order = isset($_POST['sort_order']) ? sanitize_text_field($_POST['sort_order']) : 'DESC';
         $show_date = isset($_POST['show_date']) ? 1 : 0;
         $show_author = isset($_POST['show_author']) ? 1 : 0;
         $show_excerpt = isset($_POST['show_excerpt']) ? 1 : 0;
+        $show_read_more = isset($_POST['show_read_more']) ? 1 : 0;
+        $custom_read_more_text = isset($_POST['custom_read_more_text']) ? sanitize_text_field($_POST['custom_read_more_text']) : '';
         $excerpt_length = isset($_POST['excerpt_length']) ? intval($_POST['excerpt_length']) : 15;
+        $title_length = isset($_POST['title_length']) ? intval($_POST['title_length']) : '';
         $show_categories = isset($_POST['show_categories']) ? 1 : 0;
         $show_comments = isset($_POST['show_comments']) ? 1 : 0;
         $posts_per_row = isset($_POST['posts_per_row']) ? intval($_POST['posts_per_row']) : 2;
         // new setting
         $enable_featured_image = isset($_POST['enable_featured_image']) ? sanitize_text_field($_POST['enable_featured_image']) : 'enable';
         $global_font_color = isset($_POST['global_font_color']) ? sanitize_hex_color($_POST['global_font_color']) : '';
+        $global_button_bg_color = isset($_POST['global_button_bg_color']) ? sanitize_hex_color($_POST['global_button_bg_color']) : '';
+        $global_button_hover_bg_color = isset($_POST['global_button_hover_bg_color']) ? sanitize_hex_color($_POST['global_button_hover_bg_color']) : '';
         $enable_ajax_masonry = isset($_POST['enable_ajax_masonry']) ? sanitize_text_field($_POST['enable_ajax_masonry']) : 'disable';
         // new added 
         $tittle_font_color = isset($_POST['tittle_font_color']) ? sanitize_hex_color($_POST['tittle_font_color']) : '';
@@ -304,8 +315,9 @@ class Clbgd_Core
 
         // new
         $show_pagination = isset($_POST['show_pagination']) ? '1' : '0';
-        $image_aspect_ratio = sanitize_text_field($_POST['image_aspect_ratio']);
-        $include_exclude_categories = sanitize_text_field($_POST['include_exclude_categories']);
+        $image_aspect_ratio = isset($_POST['image_aspect_ratio']) ? sanitize_text_field($_POST['image_aspect_ratio']) : 'auto';
+        $include_exclude_categories = isset($_POST['include_exclude_categories']) ? sanitize_text_field($_POST['include_exclude_categories']) : '';
+       
         // new end
         $post_id = isset($_POST['post_id']) ? intval($_POST['post_id']) : 0;
         $post_data = array(
@@ -324,6 +336,7 @@ class Clbgd_Core
             update_post_meta($post_id, '_clbgd_show_author', $show_author);
             update_post_meta($post_id, '_clbgd_show_excerpt', $show_excerpt);
             update_post_meta($post_id, '_clbgd_excerpt_length', $excerpt_length);
+            update_post_meta($post_id, '_clbgd_title_length', $title_length);
             update_post_meta($post_id, '_clbgd_show_categories', $show_categories);
             update_post_meta($post_id, '_clbgd_show_comments', $show_comments);
             update_post_meta($post_id, '_clbgd_posts_per_row', $posts_per_row);
@@ -331,6 +344,8 @@ class Clbgd_Core
             //new setting
             update_post_meta($post_id, '_clbgd_enable_featured_image', $enable_featured_image);
             update_post_meta($post_id, '_clbgd_global_font_color', $global_font_color);
+            update_post_meta($post_id, '_clbgd_global_button_bg_color', $global_button_bg_color);
+            update_post_meta($post_id, '_clbgd_global_button_hover_bg_color', $global_button_hover_bg_color);
             update_post_meta($post_id, '_clbgd_tittle_font_color', $tittle_font_color);
             update_post_meta($post_id, '_clbgd_tittle_hover_color', $tittle_hover_color);
             update_post_meta($post_id, '_clbgd_tittle_font_weight', $tittle_font_weight);
@@ -344,6 +359,8 @@ class Clbgd_Core
             //new
             update_post_meta($post_id, '_clbgd_show_pagination', $show_pagination);
             update_post_meta($post_id, '_clbgd_image_aspect_ratio', $image_aspect_ratio);
+            update_post_meta($post_id, '_clbgd_show_read_more', $show_read_more);
+            update_post_meta($post_id, '_clbgd_custom_read_more_text', $custom_read_more_text);
             if (isset($_POST['include_categories_tags'])) {
                 update_post_meta($post_id, '_clbgd_include_categories_tags', sanitize_text_field($_POST['include_categories_tags']));
             }

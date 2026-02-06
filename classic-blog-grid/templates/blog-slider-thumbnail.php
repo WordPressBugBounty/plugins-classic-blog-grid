@@ -10,7 +10,10 @@ $show_date = $meta_values['show_date'];
 $show_author = $meta_values['show_author'];
 $show_comments = $meta_values['show_comments'];
 $show_excerpt = $meta_values['show_excerpt'];
-$excerpt_length = $meta_values['excerpt_length'] ?: 15; 
+$show_read_more = $meta_values['show_read_more'];
+$excerpt_length = $meta_values['excerpt_length'] ?: 15;
+$title_length = $meta_values['title_length'];
+$custom_read_more_text = $meta_values['custom_read_more_text'];
 $show_categories = $meta_values['show_categories'];
 $enable_featured_image = $meta_values['enable_featured_image'];
 $show_social_share = $meta_values['show_social_share'];
@@ -83,7 +86,7 @@ if ($blog_posts->have_posts()) : ?>
                         $image_aspect_class = 'aspect-' . esc_attr($meta_values['image_aspect_ratio']); // e.g., 16-9, 1-1
                     }
                     ?>
-                <img src="<?php the_post_thumbnail_url('large'); ?>" alt="<?php the_title(); ?>"
+                <img src="<?php the_post_thumbnail_url('large'); ?>" alt="<?php echo esc_attr($title_length ? wp_trim_words(get_the_title(), $title_length) : get_the_title()); ?>"
                     class="main-slide-image <?php echo esc_attr($image_aspect_class); ?>">
                 <?php else : ?>
                 <img src="" alt="No Image" class="main-slide-image">
@@ -91,7 +94,7 @@ if ($blog_posts->have_posts()) : ?>
                 <div class="clbgd-slider-content">
                     <!-- new conditionally -->
                     <h2 class="clbgd-slide-title clbgd-blog-post-tittle-font">
-                        <a class="clbgd-blog-post-tittle-font" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                        <a class="clbgd-blog-post-tittle-font" href="<?php the_permalink(); ?>"><?php echo $title_length ? esc_html(wp_trim_words(get_the_title(), $title_length)) : esc_html(get_the_title()); ?></a>
                     </h2>
                     <div class="clbgd-slider-meta-content">
                         <?php if ($show_date): ?>
@@ -160,8 +163,10 @@ if ($blog_posts->have_posts()) : ?>
                         </a>
                     </div>
                     <?php endif; ?>
+                    <?php if ($show_read_more): ?>
                     <!-- END Social Share Buttons -->
-                    <a href="<?php the_permalink(); ?>" class="clbgd-slide-thumb-button clbgd-blog-post-content2">Learn More</a> 
+                    <a href="<?php the_permalink(); ?>" class="clbgd-slide-thumb-button clbgd-blog-post-content2 clbgd-button"><?php echo esc_html($custom_read_more_text); ?></a>
+                    <?php endif; ?>
                 </div>
                 <div class="slider-thambnail-item-overlay">
                 </div>
@@ -194,7 +199,7 @@ if ($blog_posts->have_posts()) : ?>
             ?>
         <div class="swiper-slide">
             <?php if (has_post_thumbnail()) : ?>
-            <img src="<?php the_post_thumbnail_url('thumbnail'); ?>" alt="<?php the_title(); ?>"
+            <img src="<?php the_post_thumbnail_url('thumbnail'); ?>" alt="<?php echo esc_attr($title_length ? wp_trim_words(get_the_title(), $title_length) : get_the_title()); ?>"
                 class="thumbnail-image">
             <?php else : ?>
             <img src="" alt="No Image" class="thumbnail-image">

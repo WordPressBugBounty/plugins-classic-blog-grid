@@ -9,6 +9,10 @@ $sort_order = isset($sort_order) ? $sort_order : 'DESC';
 $show_date = isset($show_date) ? $show_date : true;
 $show_author = isset($show_author) ? $show_author : true;
 $show_excerpt = isset($show_excerpt) ? $show_excerpt : true;
+$show_read_more = isset($show_read_more) ? $show_read_more : true;
+$global_font_color = get_post_meta($post_id, '_clbgd_global_font_color', true) ?: '#ffffff';
+$global_button_bg_color = get_post_meta($post_id, '_clbgd_global_button_bg_color', true) ?: '#3db6ff';
+$global_button_hover_bg_color = get_post_meta($post_id, '_clbgd_global_button_hover_bg_color', true) ?: '#555753';
 //end
 $show_categories = isset($show_categories) ? $show_categories : false; 
 $show_comments = isset($show_comments) ? $show_comments : false; 
@@ -81,7 +85,7 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                     <div class="grid-latout-options-label">
                                         <input type="radio" name="grid_layout" value="list"
                                             <?php checked($grid_layout, 'list'); ?>>
-                                        <p><?php esc_html_e('List Layout', 'classic-blog-grid'); ?></p><span class="pro-badge"></i>Free</span>
+                                        <p><?php esc_html_e('List Layout', 'classic-blog-grid'); ?></p><span class="pro-badge">Free</span>
 
                                     </div>
                                     <img src="<?php echo esc_url(CLBGD_PLUGIN_URL . 'assets/images/layout1.png'); ?>"
@@ -91,7 +95,7 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                     <div class="grid-latout-options-label">
                                         <input type="radio" name="grid_layout" value="masonry"
                                             <?php checked($grid_layout, 'masonry'); ?>>
-                                        <p><?php esc_html_e('Masonry Layout', 'classic-blog-grid'); ?></p><span class="pro-badge"></i>Free</span>
+                                        <p><?php esc_html_e('Masonry Layout', 'classic-blog-grid'); ?></p><span class="pro-badge">Free</span>
 
                                     </div>
 
@@ -102,7 +106,7 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                     <div class="grid-latout-options-label">
                                         <input type="radio" name="grid_layout" value="slider"
                                             <?php checked($grid_layout, 'slider'); ?>>
-                                        <p><?php esc_html_e('Slider Layout', 'classic-blog-grid'); ?></p><span class="pro-badge"></i>Free</span>
+                                        <p><?php esc_html_e('Slider Layout', 'classic-blog-grid'); ?></p><span class="pro-badge">Free</span>
 
                                     </div>
                                     <img src="<?php echo esc_url(CLBGD_PLUGIN_URL . 'assets/images/layout3.png'); ?>"
@@ -115,7 +119,7 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                         <input type="radio" name="grid_layout" value="slider-thumbnail"
                                             <?php checked($grid_layout, 'slider-thumbnail'); ?><?php echo !$is_premium_user ? 'disabled' : ''; ?>>
                                         <p><?php esc_html_e('Slider Thumbnail Layout', 'classic-blog-grid'); ?>
-                                            <span class="pro-badge"><i class="fa fa-crown"></i> PRO</span>
+                                            <?php echo clbgd_pro_badge(); ?>
                                         </p>
                                     </div>
                                     <img src="<?php echo esc_url(CLBGD_PLUGIN_URL . 'assets/images/layout4.png'); ?>"
@@ -127,7 +131,7 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                         <input type="radio" name="grid_layout" value="box"
                                             <?php checked($grid_layout, 'box'); ?><?php echo !$is_premium_user ? 'disabled' : ''; ?>>
                                         <p><?php esc_html_e('Grid Box Layout', 'classic-blog-grid'); ?>
-                                            <span class="pro-badge"><i class="fa fa-crown"></i> PRO</span>
+                                            <?php echo clbgd_pro_badge(); ?>
                                         </p>
                                     </div>
                                     <img src="<?php echo esc_url(CLBGD_PLUGIN_URL . 'assets/images/layout5.png'); ?>"
@@ -139,7 +143,7 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                         <input type="radio" name="grid_layout" value="search-layout"
                                             <?php checked($grid_layout, 'search-layout'); ?><?php echo !$is_premium_user ? 'disabled' : ''; ?>>
                                         <p><?php esc_html_e('Grid With search Bar Layout', 'classic-blog-grid'); ?>
-                                            <span class="pro-badge"><i class="fa fa-crown"></i> PRO</span>
+                                            <?php echo clbgd_pro_badge(); ?>
                                         </p>
                                     </div>
                                     <img src="<?php echo esc_url(CLBGD_PLUGIN_URL . 'assets/images/layout6.png'); ?>"
@@ -151,7 +155,7 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                         <input type="radio" name="grid_layout" value="category-tab"
                                             <?php checked($grid_layout, 'category-tab'); ?><?php echo !$is_premium_user ? 'disabled' : ''; ?>>
                                         <p><?php esc_html_e('Grid With Category Tab Layout', 'classic-blog-grid'); ?>
-                                            <span class="pro-badge"><i class="fa fa-crown"></i> PRO</span>
+                                            <?php echo clbgd_pro_badge(); ?>
                                         </p>
                                     </div>
                                     <img src="<?php echo esc_url(CLBGD_PLUGIN_URL . 'assets/images/layout7.png'); ?>"
@@ -163,7 +167,7 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                         <input type="radio" name="grid_layout" value="carousel"
                                             <?php checked($grid_layout, 'carousel'); ?><?php echo !$is_premium_user ? 'disabled' : ''; ?>>
                                         <p><?php esc_html_e('Carousel Layout', 'classic-blog-grid'); ?>
-                                            <span class="pro-badge"><i class="fa fa-crown"></i> PRO</span>
+                                            <?php echo clbgd_pro_badge(); ?>
                                         </p>
                                     </div>
                                     <img src="<?php echo esc_url(CLBGD_PLUGIN_URL . 'assets/images/layout8.png'); ?>"
@@ -175,7 +179,7 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                         <input type="radio" name="grid_layout" value="alternate-list"
                                             <?php checked($grid_layout, 'alternate-list'); ?><?php echo !$is_premium_user ? 'disabled' : ''; ?>>
                                         <p><?php esc_html_e('Alternate List Layout', 'classic-blog-grid'); ?>
-                                            <span class="pro-badge"><i class="fa fa-crown"></i> PRO</span>
+                                            <?php echo clbgd_pro_badge(); ?>
                                         </p>
                                     </div>
                                     <img src="<?php echo esc_url(CLBGD_PLUGIN_URL . 'assets/images/layout9.png'); ?>"
@@ -187,7 +191,7 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                         <input type="radio" name="grid_layout" value="timeline-list"
                                             <?php checked($grid_layout, 'timeline-list'); ?><?php echo !$is_premium_user ? 'disabled' : ''; ?>>
                                         <p><?php esc_html_e('Timeline Layout', 'classic-blog-grid'); ?>
-                                            <span class="pro-badge"><i class="fa fa-crown"></i> PRO</span>
+                                            <?php echo clbgd_pro_badge(); ?>
                                         </p>
                                     </div>
                                     <img src="<?php echo esc_url(CLBGD_PLUGIN_URL . 'assets/images/layout10.png'); ?>"
@@ -201,7 +205,7 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                             <?php echo !$is_premium_user ? 'disabled' : ''; ?>>
                                         <p>
                                             <?php esc_html_e('Category Sidebar', 'classic-blog-grid'); ?>
-                                            <span class="pro-badge"><i class="fa fa-crown"></i> PRO</span>
+                                            <?php echo clbgd_pro_badge(); ?>
                                         </p>
                                     </div>
                                     <img src="<?php echo esc_url(CLBGD_PLUGIN_URL . 'assets/images/layout11.png'); ?>"
@@ -214,7 +218,7 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                         <input type="radio" name="grid_layout" value="list-category"
                                             <?php checked($grid_layout, 'list-category'); ?><?php echo !$is_premium_user ? 'disabled' : ''; ?>>
                                         <p><?php esc_html_e('List with Category Sidebar Layout', 'classic-blog-grid'); ?>
-                                            <span class="pro-badge"><i class="fa fa-crown"></i> PRO</span>
+                                            <?php echo clbgd_pro_badge(); ?>
                                         </p>
                                     </div>
                                     <img src="<?php echo esc_url(CLBGD_PLUGIN_URL . 'assets/images/layout12.png'); ?>"
@@ -289,10 +293,10 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                                 <ul class="dropdown-menu">
                                                     <li data-value="DESC"
                                                         class="dropdown-item <?php echo $sort_order == 'DESC' ? 'selected' : ''; ?>">
-                                                        Publish Date Ascending<span class="pro-badge"></i>Free</span></li>
+                                                        Publish Date Ascending<span class="pro-badge">Free</span></li>
                                                     <li data-value="ASC"
                                                         class="dropdown-item <?php echo $sort_order == 'ASC' ? 'selected' : ''; ?>">
-                                                        Publish Date Descending<span class="pro-badge"></i>Free</span></li>
+                                                        Publish Date Descending<span class="pro-badge">Free</span></li>
 
                                                     <?php 
                                                       foreach ($premium_options as $value => $label) { 
@@ -303,7 +307,7 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                                         class="dropdown-item pro-option <?php echo esc_attr($disabled); ?> <?php echo $sort_order == $value ? 'selected' : ''; ?>">
 
                                                         <?php echo esc_html($label); ?>
-                                                        <span class="pro-badge"><i class="fa fa-crown"></i> PRO</span>
+                                                        <?php echo clbgd_pro_badge(); ?>
                                                     </li>
                                                     <?php } ?>
                                                 </ul>
@@ -317,6 +321,17 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                     <!-- dropdown end -->
 
                                     <div class="excerpt-length-box">
+                                        <label for="tittle_length">Post Title Max Length
+                                        <span class="exclamatory-tooltip">Set the maximum number of words.</span>
+                                        </label>
+                                        <?php $title_length = get_post_meta($post_id, '_clbgd_title_length', true); ?>
+                                        <input type="number" name="title_length" id="title_length"
+                                            class="small-text" min="1" step="1"
+                                            value="<?php echo esc_attr($title_length); ?>" 
+                                            placeholder="<?php esc_attr_e('No limit', 'classic-blog-grid'); ?>" />
+                                    </div>
+
+                                    <div class="excerpt-length-box">
                                         <label for="excerpt_length">Excerpt Length
                                         <span class="exclamatory-tooltip">Set the number of words for the post excerpt.</span>
                                         </label>
@@ -324,6 +339,9 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                             class="small-text" min="10" step="1"
                                             value="<?php echo esc_attr(isset($excerpt_length) ? $excerpt_length : '10'); ?>" />
                                     </div>
+                                    
+                                    
+                                    
                                 </div>
 
                                 <div class="settings-container">
@@ -336,7 +354,7 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                                     <input type="checkbox" name="show_date"
                                                         <?php checked($show_date, true); ?> > Show Date
                                                 </div>
-                                                <span class="pro-badge"></i>Free</span>
+                                                <span class="pro-badge">Free</span>
 
                                             </label>
                                             <label>
@@ -344,7 +362,7 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                                     <input type="checkbox" name="show_author"
                                                         <?php checked($show_author, true); ?>> Show Author
                                                 </div>
-                                                <span class="pro-badge"></i>Free</span>
+                                                <span class="pro-badge">Free</span>
 
                                             </label>
                                             <label>
@@ -352,15 +370,26 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                                     <input type="checkbox" name="show_excerpt"
                                                         <?php checked($show_excerpt, true); ?>> Show Excerpt
                                                 </div>
-                                                <span class="pro-badge"></i>Free</span>
+                                                <span class="pro-badge">Free</span>
 
                                             </label>
+                                            <label>
+                                                <div class="metadata-option-label">
+                                                    <input type="checkbox" name="show_read_more"
+                                                        <?php checked($show_read_more, true); ?>> Show Read More Button
+                                                </div>
+                                                <span class="pro-badge">Free</span>
+
+                                            </label>
+                                            
+                                            
+
                                             <label>
                                                 <div class="metadata-option-label">
                                                     <input type="checkbox" name="show_categories"
                                                         <?php checked($show_categories, true); ?>> Show Category
                                                 </div>
-                                                <span class="pro-badge"></i>Free</span>
+                                                <span class="pro-badge">Free</span>
 
                                             </label>
                                             <label>
@@ -368,7 +397,7 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                                     <input type="checkbox" name="show_comments"
                                                         <?php checked($show_comments, true); ?>> Show Comment Count
                                                 </div>
-                                                <span class="pro-badge"></i>Free</span>
+                                                <span class="pro-badge">Free</span>
 
                                             </label>
 
@@ -379,7 +408,7 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                                         <?php echo !$is_premium_user ? 'disabled' : ''; ?>>
                                                     Show Tags
                                                 </div>
-                                                <span class="pro-badge"><i class="fa fa-crown"></i> PRO</span>
+                                                <?php echo clbgd_pro_badge(); ?>
                                             </label>
 
                                             <label>
@@ -389,9 +418,10 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                                         <?php echo !$is_premium_user ? 'disabled' : ''; ?>>
                                                     Show Social Share
                                                 </div> 
-                                                <span class="pro-badge"><i class="fa fa-crown"></i>
-                                                    PRO</span>
+                                                <?php echo clbgd_pro_badge(); ?>
                                             </label>
+
+                                           
 
                                         </div>
                                     </div>
@@ -401,7 +431,7 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                         <!-- Display Search Box (PRO) -->
                                         <div class="option-row">
                                             <label for="display_search_box">Display Search Box:
-                                                    <span class="pro-badge"><i class="fa-solid fa-crown"></i> PRO</span>
+                                                    <?php echo clbgd_pro_badge(); ?>
                                             </label>
                                             <div class="option-group">
                                                 <label>
@@ -422,7 +452,7 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                         <div class="option-row">
                                             <label for="enable_sidebar_category_filter">Enable Sidebar Post Category Filter:
                                                
-                                                    <span class="pro-badge"><i class="fa-solid fa-crown"></i> PRO</span>
+                                                    <?php echo clbgd_pro_badge(); ?>
                                             </label>
                                             <div class="option-group">
                                                 <label>
@@ -455,6 +485,26 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                                </label>
                                            </div>
                                        </div>
+
+                                       <!-- new add -->
+
+                
+
+                                       <div class="option-row">
+                                            <label for="enable_sidebar_category_filter">Custom "Read More" Button Text:
+                                               
+                                                    <span class="pro-badge">Free</span>
+                                            </label>
+                                            <div class="option-group">
+                                                <?php $custom_read_more_text = get_post_meta($post_id, '_clbgd_custom_read_more_text', true) ?: 'Read More'; ?>
+                                                <input type="text" name="custom_read_more_text" id="custom_read_more_text" 
+                                                       class="regular-text" 
+                                                       value="<?php echo esc_attr($custom_read_more_text); ?>" 
+                                                       placeholder="<?php esc_attr_e('Enter custom read more text', 'classic-blog-grid'); ?>" />
+                                                
+                                            </div>
+                                        </div>
+                                       <!-- new end -->
                                     </div>
                                 </div>
                             </div>
@@ -488,7 +538,7 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                     <div class="styling-customization-row slider-animation-options premium-feature">
                                         <label for="slider_animation">Slider Animation 
                                         </label>
-                                        <span class="pro-badge"><i class="fa fa-crown"></i> PRO</span>
+                                        <?php echo clbgd_pro_badge(); ?>
                                         <div class="styling-customization-options">
                                             <select name="slider_animation" id="slider_animation"
                                                 <?php echo !$is_premium_user ? 'disabled' : ''; ?>>
@@ -544,7 +594,7 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                     ?>
                                     <div class="styling-customization-row blog-title-font-options premium-feature">
                                         <label for="blog_title_font">Blog Title Font</label>
-                                        <span class="pro-badge"><i class="fa fa-crown"></i> PRO</span>
+                                        <?php echo clbgd_pro_badge(); ?>
                                         <select name="blog_title_font" id="blog_title_font" <?php echo !$is_premium_user ? 'disabled' : ''; ?>>
                                             <?php foreach ($font_families as $font_key => $font_name) : ?>
                                                 <option value="<?php echo esc_attr($font_key); ?>" <?php selected($blog_title_font, $font_key); ?>>
@@ -562,7 +612,7 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                     
                                     <div class="styling-customization-row blog-excerpt-font-options premium-feature">
                                         <label for="blog_excerpt_font">Blog Excerpt Font</label>
-                                        <span class="pro-badge"><i class="fa fa-crown"></i> PRO</span>
+                                        <?php echo clbgd_pro_badge(); ?>
                                         <select name="blog_excerpt_font" id="blog_excerpt_font" <?php echo !$is_premium_user ? 'disabled' : ''; ?>>
                                             <?php foreach ($font_families as $font_key => $font_name) : ?>
                                                 <option value="<?php echo esc_attr($font_key); ?>" <?php selected($blog_excerpt_font, $font_key); ?>>
@@ -582,14 +632,14 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                     <div class="styling-customization-row-box">
                                        <!-- new one end for font -->
                                        <div class="styling-customization-row global-font-color-option">
-                                           <label for="tittle_font_color">Tittle Font Color</label><span class="pro-badge"></i>Free</span>
+                                           <label for="tittle_font_color">Tittle Font Color</label><span class="pro-badge">Free</span>
                                            <input type="color" name="tittle_font_color" id="tittle_font_color"
                                                value="<?php echo esc_attr($tittle_font_color); ?>"
                                                 />
                                        </div>
                                        
                                         <div class="styling-customization-row global-font-color-option">
-                                            <label for="tittle_hover_color">Tittle Hover Color</label><span class="pro-badge"></i>Free</span>
+                                            <label for="tittle_hover_color">Tittle Hover Color</label><span class="pro-badge">Free</span>
                                             <input type="color" name="tittle_hover_color" id="tittle_hover_color"
                                                 value="<?php echo esc_attr($tittle_hover_color); ?>"
                                                  />
@@ -623,7 +673,7 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                     <div class="styling-customization-row-box">
                                        <!-- new one end for font -->
                                        <div class="styling-customization-row global-font-color-option">
-                                           <label for="excerpt_font_color">Excerpt Font Color</label><span class="pro-badge"></i>Free</span>
+                                           <label for="excerpt_font_color">Excerpt Font Color</label><span class="pro-badge">Free</span>
                                            <input type="color" name="excerpt_font_color" id="excerpt_font_color"
                                                value="<?php echo esc_attr($excerpt_font_color); ?>"
                                                 />
@@ -654,7 +704,7 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                     <div class="styling-customization-row-box">
                                        <!-- new one end for font -->
                                        <div class="styling-customization-row global-font-color-option">
-                                           <label for="meta_font_color">Meta Data Font Color</label><span class="pro-badge"></i>Free</span>
+                                           <label for="meta_font_color">Meta Data Font Color</label><span class="pro-badge">Free</span>
                                            <input type="color" name="meta_font_color" id="meta_font_color"
                                                value="<?php echo esc_attr($meta_font_color); ?>"
                                                 />
@@ -683,20 +733,42 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                     <!-- global -->
                                     <div class="styling-customization-row-box">
                                        <div class="styling-customization-row global-font-color-option">
-                                           <label for="global_font_color">Button Font Color</label><span class="pro-badge"></i>Free</span>
+                                           <label for="global_font_color">Button Font Color</label><span class="pro-badge">Free</span>
                                            <input type="color" name="global_font_color" id="global_font_color"
                                                value="<?php echo esc_attr($global_font_color); ?>"
                                                 />
                                        </div>
 
+                                      
+                                       <div class="styling-customization-row global-button-bg-color-option">
+                                            <label for="global_button_bg_color">Button Background Color</label><span class="pro-badge">Free</span>
+                                            <input type="color" name="global_button_bg_color" id="global_button_bg_color"
+                                                value="<?php echo esc_attr($global_button_bg_color); ?>" />
+                                        </div>
+                                    </div>
 
-                                       <!-- new one end for font -->
+
+                                    <!-- new for buuton bg color -->
+
+                                    <div class="styling-customization-row-box">
+                                        
+
+                                        <div class="styling-customization-row global-button-hover-bg-color-option">
+                                            <label for="global_button_hover_bg_color">Button Hover Background Color</label><span class="pro-badge">Free</span>
+                                            <input type="color" name="global_button_hover_bg_color" id="global_button_hover_bg_color"
+                                                value="<?php echo esc_attr($global_button_hover_bg_color); ?>" />
+                                        </div>
+
+                                         <!-- new one end for font -->
                                        <div class="styling-customization-row grid-overlay-color-option">
-                                          <label for="grid_overlay_color">Grid Overlay Color</label><span class="pro-badge"><i class="fa fa-crown"></i> PRO</span>
+                                          <label for="grid_overlay_color">Grid Overlay Color</label><?php echo clbgd_pro_badge(); ?>
                                           <input type="color" name="grid_overlay_color" id="grid_overlay_color"
                                               value="<?php echo esc_attr($grid_overlay_color); ?>"  <?php echo !$is_premium_user ? 'disabled' : ''; ?>/>
                                        </div>
+
+
                                     </div>
+
                                    
                                 
                                     <!-- new -->
@@ -773,15 +845,11 @@ $is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                 <p class="description">
                                     <?php esc_html_e('Enter your custom CSS rules here. These will be applied globally.', 'classic-blog-grid'); ?>
                                 </p>
-                                <span class="pro-badge"><i class="fa fa-crown"></i> PRO</span>
+                                <?php echo clbgd_pro_badge(); ?>
                             </div>
 
                         </td>
                     </tr>
-
-
-
-                   
                     <!-- end -->
                 </table>
                 <?php submit_button($post_id ? esc_html__('Update Grid', 'classic-blog-grid') : esc_html__('Add Grid', 'classic-blog-grid')); ?>
