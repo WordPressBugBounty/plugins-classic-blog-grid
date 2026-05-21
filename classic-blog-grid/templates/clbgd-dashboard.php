@@ -27,23 +27,23 @@
                 <h2 class="clbgd-hndle"><span>Quick Stats</span></h2>
                 <div class="clbgd-inside d-flex flex-column gap-2">
                     <?php
-                    $total_grids = wp_count_posts('clbgd_grid')->publish;
+                    $clbgd_total_grids = wp_count_posts('clbgd_grid')->publish;
 
-                    $recent_activity = get_posts(array(
+                    $clbgd_recent_activity = get_posts(array(
                         'post_type' => 'clbgd_grid',
                         'numberposts' => 1,
                         'orderby' => 'date',
                         'order' => 'DESC',
                     ));
-                    $recent_time = !empty($recent_activity) ? human_time_diff(get_the_time('U', $recent_activity[0]), current_time('timestamp')) . ' ago' : 'No recent updates';
-                    $total_grids_draft = wp_count_posts('clbgd_grid')->draft;
-                    $total_grids_pending = wp_count_posts('clbgd_grid')->pending;
+                    $clbgd_recent_time = !empty($clbgd_recent_activity) ? human_time_diff(get_the_time('U', $clbgd_recent_activity[0]), current_time('timestamp')) . ' ago' : 'No recent updates';
+                    $clbgd_total_grids_draft = wp_count_posts('clbgd_grid')->draft;
+                    $clbgd_total_grids_pending = wp_count_posts('clbgd_grid')->pending;
                     ?>
                     
-                    <p><img class="check-icon" src="<?php echo esc_url(CLBGD_PLUGIN_URL . 'assets/images/check.svg'); ?>" alt="<?php esc_attr_e('check', 'classic-blog-grid'); ?>"> Total Grids Created: <?php echo esc_html($total_grids); ?></p>
-                    <p><img class="check-icon" src="<?php echo esc_url(CLBGD_PLUGIN_URL . 'assets/images/check.svg'); ?>" alt="<?php esc_attr_e('check', 'classic-blog-grid'); ?>"> Recent Activity: <?php echo esc_html($recent_time); ?></p>
-                    <p><img class="check-icon" src="<?php echo esc_url(CLBGD_PLUGIN_URL . 'assets/images/check.svg'); ?>" alt="<?php esc_attr_e('check', 'classic-blog-grid'); ?>"> Grids in Draft: <?php echo esc_html($total_grids_draft); ?></p>
-                    <p><img class="check-icon" src="<?php echo esc_url(CLBGD_PLUGIN_URL . 'assets/images/check.svg'); ?>" alt="<?php esc_attr_e('check', 'classic-blog-grid'); ?>"> Grids Pending Review: <?php echo esc_html($total_grids_pending); ?></p>
+                    <p><img class="check-icon" src="<?php echo esc_url(CLBGD_PLUGIN_URL . 'assets/images/check.svg'); ?>" alt="<?php esc_attr_e('check', 'classic-blog-grid'); ?>"> Total Grids Created: <?php echo esc_html($clbgd_total_grids); ?></p>
+                    <p><img class="check-icon" src="<?php echo esc_url(CLBGD_PLUGIN_URL . 'assets/images/check.svg'); ?>" alt="<?php esc_attr_e('check', 'classic-blog-grid'); ?>"> Recent Activity: <?php echo esc_html($clbgd_recent_time); ?></p>
+                    <p><img class="check-icon" src="<?php echo esc_url(CLBGD_PLUGIN_URL . 'assets/images/check.svg'); ?>" alt="<?php esc_attr_e('check', 'classic-blog-grid'); ?>"> Grids in Draft: <?php echo esc_html($clbgd_total_grids_draft); ?></p>
+                    <p><img class="check-icon" src="<?php echo esc_url(CLBGD_PLUGIN_URL . 'assets/images/check.svg'); ?>" alt="<?php esc_attr_e('check', 'classic-blog-grid'); ?>"> Grids Pending Review: <?php echo esc_html($clbgd_total_grids_pending); ?></p>
                 </div>
             </div>       
         </div>
@@ -90,7 +90,17 @@
      </div>
     </div>
     <footer class="clbgd-plugin-footer">
-        <p>Classic Blog Grid Version <?php echo CLBGD_PLUGIN_VERSION; ?> | Developed by Classic Templates</p>
+        <p>
+            <?php
+            echo esc_html(
+                sprintf(
+                    /* translators: %s: plugin version */
+                    __( 'Classic Blog Grid Version %s | Developed by Classic Templates', 'classic-blog-grid' ),
+                    CLBGD_PLUGIN_VERSION
+                )
+            );
+            ?>
+        </p>
     </footer>
 </div>
 </div>

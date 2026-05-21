@@ -1,3 +1,8 @@
+<?php
+if (!defined('ABSPATH')) {
+    exit;
+}
+?>
 <div class="wrap clbgd-templates-wrap">
 <div class="row">
         <div class="col-lg-8 col-md-6">
@@ -25,11 +30,11 @@
                         <span class="dashicons dashicons-arrow-down"></span>
                     </div>
                     <ul class="clbgd-templates-collections-group">
-                        <?php $collections_arr = clbgd_get_collections(); ?>
-                        <?php foreach ( $collections_arr as $collection ) {
+                        <?php $clbgd_collections_arr = clbgd_get_collections(); ?>
+                        <?php foreach ( $clbgd_collections_arr as $clbgd_collection ) {
                             
-                            if ($collection->handle != 'free-wordpress-themes' && $collection->handle != 'uncategorized' && $collection->handle != 'testing') { ?>
-                                <li data-value="<?php echo esc_attr($collection->handle); ?>"><?php echo esc_html($collection->title); ?></li>
+                            if ($clbgd_collection->handle != 'free-wordpress-themes' && $clbgd_collection->handle != 'uncategorized' && $clbgd_collection->handle != 'testing') { ?>
+                                <li data-value="<?php echo esc_attr($clbgd_collection->handle); ?>"><?php echo esc_html($clbgd_collection->title); ?></li>
                             <?php } ?>
                             
                         <?php } ?>
@@ -47,25 +52,25 @@
         <div class="clbgd-templates-search-content-box row">
             <div class="col-md-8">                   
                 <div class="clbgd-filter-content clbgd-main-grid row" id="clbgd-filter-content">
-                    <?php $get_filtered_products = clbgd_get_filtered_products();
-                        if (isset($get_filtered_products['products']) && !empty($get_filtered_products['products'])) {
-                            foreach ( $get_filtered_products['products'] as $product ) {
+                    <?php $clbgd_get_filtered_products = clbgd_get_filtered_products();
+                        if (isset($clbgd_get_filtered_products['products']) && !empty($clbgd_get_filtered_products['products'])) {
+                            foreach ( $clbgd_get_filtered_products['products'] as $clbgd_product ) {
 
-                                $product_obj = $product->node;
+                                $clbgd_product_obj = $clbgd_product->node;
                                 
-                                if (isset($product_obj->inCollection) && !$product_obj->inCollection || $product_obj->title == 'Testing' || $product_obj->title == 'Theme Extra Customizations') {
+                                if (isset($clbgd_product_obj->inCollection) && !$clbgd_product_obj->inCollection || $clbgd_product_obj->title == 'Testing' || $clbgd_product_obj->title == 'Theme Extra Customizations') {
                                     continue;
                                 }
 
-                                $demo_url = isset($product->node->metafield->value) ? $product->node->metafield->value : '';
-                                $product_url = isset($product->node->onlineStoreUrl) ? $product->node->onlineStoreUrl : '';
-                                $image_src = isset($product->node->images->edges[0]->node->src) ? $product->node->images->edges[0]->node->src : ''; ?>
+                                $clbgd_demo_url = isset($clbgd_product->node->metafield->value) ? $clbgd_product->node->metafield->value : '';
+                                $clbgd_product_url = isset($clbgd_product->node->onlineStoreUrl) ? $clbgd_product->node->onlineStoreUrl : '';
+                                $clbgd_image_src = isset($clbgd_product->node->images->edges[0]->node->src) ? $clbgd_product->node->images->edges[0]->node->src : ''; ?>
 
                                 <div class="clbgd-item clbgd-filter-free col-xl-4 col-lg-6 col-12 mb-4">
                                     <div class="clbgd-item-inner-box">                              
                                         <div class="clbgd-item-preview">
                                             <div class="clbgd-item-screenshot">
-                                                <img src="<?php echo esc_url($image_src); ?>" loading="lazy" alt="<?php echo esc_attr($product_obj->title); ?>">
+                                                <img src="<?php echo esc_url($clbgd_image_src); ?>" loading="lazy" alt="<?php echo esc_attr($clbgd_product_obj->title); ?>">
                                                 <div class="clbgd-item-overlay">
                                                 
                                                 </div>
@@ -73,12 +78,12 @@
                                         </div>
                                         <div class="clbgd-item-footer">
                                             <div class="clbgd-item-footer_meta">
-                                                <h3 class="theme-name"><?php echo esc_html($product_obj->title); ?></h3>
-                                                <p class="theme-seo-title"><?php echo esc_html($product_obj->seo->title); ?></p>
+                                                <h3 class="theme-name"><?php echo esc_html($clbgd_product_obj->title); ?></h3>
+                                                <p class="theme-seo-title"><?php echo esc_html($clbgd_product_obj->seo->title); ?></p>
                                                 <div class="clbgd-item-footer-actions d-flex justify-content-center gap-2">
-                                                    <a class="clbgd-buy-now clbgd-btn" href="<?php echo esc_attr($product_url); ?>" aria-label="Buy Now"><?php echo esc_html('Buy Now'); ?></a>
-                                                    <?php if ( $demo_url != '' ) { ?>
-                                                        <a class="clbgd-item-demo-link clbgd-btn" href="<?php echo esc_attr($demo_url); ?>" target="_blank"><?php echo esc_html('Demo'); ?></a>
+                                                    <a class="clbgd-buy-now clbgd-btn" href="<?php echo esc_attr($clbgd_product_url); ?>" aria-label="Buy Now"><?php echo esc_html('Buy Now'); ?></a>
+                                                    <?php if ( $clbgd_demo_url != '' ) { ?>
+                                                        <a class="clbgd-item-demo-link clbgd-btn" href="<?php echo esc_attr($clbgd_demo_url); ?>" target="_blank"><?php echo esc_html('Demo'); ?></a>
                                                     <?php } ?>
                                                 </div>
                                             </div>
@@ -89,9 +94,9 @@
                         }
                     ?>
                 </div>
-                <?php if (isset($get_filtered_products['pagination']->hasNextPage) && $get_filtered_products['pagination']->hasNextPage) { ?>
-                    <a href="#" class="clbgd-load-more" name="clbgd-end-cursor" data-pagination="<?php echo esc_attr(isset($get_filtered_products['pagination']->endCursor) ? $get_filtered_products['pagination']->endCursor : '') ?>">Load More</a>
-                    <input type="hidden" name="clbgd-end-cursor" value="<?php echo esc_attr(isset($get_filtered_products['pagination']->endCursor) ? $get_filtered_products['pagination']->endCursor : '') ?>">
+                <?php if (isset($clbgd_get_filtered_products['pagination']->hasNextPage) && $clbgd_get_filtered_products['pagination']->hasNextPage) { ?>
+                    <a href="#" class="clbgd-load-more" name="clbgd-end-cursor" data-pagination="<?php echo esc_attr(isset($clbgd_get_filtered_products['pagination']->endCursor) ? $clbgd_get_filtered_products['pagination']->endCursor : '') ?>">Load More</a>
+                    <input type="hidden" name="clbgd-end-cursor" value="<?php echo esc_attr(isset($clbgd_get_filtered_products['pagination']->endCursor) ? $clbgd_get_filtered_products['pagination']->endCursor : '') ?>">
                 <?php } ?>
             </div> 
             <div class="col-md-4">

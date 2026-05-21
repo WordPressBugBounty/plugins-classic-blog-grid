@@ -227,13 +227,13 @@ class Clbgd_Shortcodes {
         }
         // pass the animation 
         if ($type === 'slider' || $type === 'slider-thumbnail') {
-            $slider_animation = get_post_meta($post_id, '_clbgd_slider_animation', true);
+            $clbgd_slider_animation = get_post_meta($post_id, '_clbgd_slider_animation', true);
         
-            if (!$slider_animation) {
-                $slider_animation = 'slide'; 
+            if (!$clbgd_slider_animation) {
+                $clbgd_slider_animation = 'slide'; 
             }
             wp_localize_script("clbgd-{$styles[$type]}-js", 'clbgdSliderSettings', array(
-                'animation' => $slider_animation,
+                'animation' => $clbgd_slider_animation,
                 'security' => wp_create_nonce('clbgd_ajax_nonce')
             ));
         }

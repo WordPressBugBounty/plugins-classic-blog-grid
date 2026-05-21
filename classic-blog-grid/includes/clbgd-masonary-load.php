@@ -1,27 +1,39 @@
 <?php
-add_action('wp_ajax_load_more_posts', 'load_more_posts');
-add_action('wp_ajax_nopriv_load_more_posts', 'load_more_posts');
-function load_more_posts()
+if (!defined('ABSPATH')) {
+    exit;
+}
+?>
+<?php
+add_action('wp_ajax_load_more_posts', 'clbgd_load_more_posts');
+add_action('wp_ajax_nopriv_load_more_posts', 'clbgd_load_more_posts');
+function clbgd_load_more_posts()
 {
-    $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
-    $post_id = isset($_POST['post_id']) ? intval($_POST['post_id']) : 0;
-    $show_date = isset($_POST['show_date']) ? filter_var($_POST['show_date'], FILTER_VALIDATE_BOOLEAN) : false;
-    $show_author = isset($_POST['show_author']) ? filter_var($_POST['show_author'], FILTER_VALIDATE_BOOLEAN) : false;
-    $show_categories = isset($_POST['show_categories']) ? filter_var($_POST['show_categories'], FILTER_VALIDATE_BOOLEAN) : false;
-    $show_excerpt = isset($_POST['show_excerpt']) ? filter_var($_POST['show_excerpt'], FILTER_VALIDATE_BOOLEAN) : false;
-    $show_read_more = isset($_POST['show_read_more']) ? filter_var($_POST['show_read_more'], FILTER_VALIDATE_BOOLEAN) : false;
-    $show_tags = isset($_POST['show_tags']) ? filter_var($_POST['show_tags'], FILTER_VALIDATE_BOOLEAN) : false;
-    $excerpt_length = isset($_POST['excerpt_length']) ? intval($_POST['excerpt_length']) : 15;
-    $show_comments = isset($_POST['show_comments']) ? filter_var($_POST['show_comments'], FILTER_VALIDATE_BOOLEAN) : false;
-    $posts_per_page = isset($_POST['posts_per_page']) ? intval($_POST['posts_per_page']) : 2;
-    // Get values
-    $show_categories = isset($_POST['show_categories']) ? filter_var($_POST['show_categories'], FILTER_VALIDATE_BOOLEAN) : false;
-    $enable_featured_image = isset($_POST['enable_featured_image']) ? sanitize_text_field($_POST['enable_featured_image']) : 'enable';
-    $show_social_share = isset($_POST['show_social_share']) ? filter_var($_POST['show_social_share'], FILTER_VALIDATE_BOOLEAN) : false;
-    $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
-    $sort_order = isset($_POST['sort_order']) ? sanitize_text_field($_POST['sort_order']) : 'DESC';
+    // phpcs:disable WordPress.Security.NonceVerification.Missing
+    // phpcs:disable WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+
+    $page = isset($_POST['page']) ? intval( wp_unslash($_POST['page']) ) : 1;
+    $post_id = isset($_POST['post_id']) ? intval( wp_unslash($_POST['post_id']) ) : 0;
+    $clbgd_show_date = isset($_POST['show_date']) ? filter_var( wp_unslash($_POST['show_date']), FILTER_VALIDATE_BOOLEAN ) : false;
+    $clbgd_show_author = isset($_POST['show_author']) ? filter_var( wp_unslash($_POST['show_author']), FILTER_VALIDATE_BOOLEAN ) : false;
+    $clbgd_show_categories = isset($_POST['show_categories']) ? filter_var( wp_unslash($_POST['show_categories']), FILTER_VALIDATE_BOOLEAN ) : false;
+    $clbgd_show_excerpt = isset($_POST['show_excerpt']) ? filter_var( wp_unslash($_POST['show_excerpt']), FILTER_VALIDATE_BOOLEAN ) : false;
+    $clbgd_show_read_more = isset($_POST['show_read_more']) ? filter_var( wp_unslash($_POST['show_read_more']), FILTER_VALIDATE_BOOLEAN ) : false;
+    $clbgd_show_tags = isset($_POST['show_tags']) ? filter_var( wp_unslash($_POST['show_tags']), FILTER_VALIDATE_BOOLEAN ) : false;
+    $clbgd_excerpt_length = isset($_POST['excerpt_length']) ? intval( wp_unslash($_POST['excerpt_length']) ) : 15;
+    $clbgd_show_comments = isset($_POST['show_comments']) ? filter_var( wp_unslash($_POST['show_comments']), FILTER_VALIDATE_BOOLEAN ) : false;
+    $clbgd_posts_per_page = isset($_POST['posts_per_page']) ? intval( wp_unslash($_POST['posts_per_page']) ) : 2;
+    $clbgd_enable_featured_image = isset($_POST['enable_featured_image'])
+        ? sanitize_text_field( wp_unslash($_POST['enable_featured_image']) )
+        : 'enable';
+    $clbgd_show_social_share = isset($_POST['show_social_share']) ? filter_var( wp_unslash($_POST['show_social_share']), FILTER_VALIDATE_BOOLEAN ) : false;
+    $clbgd_paged = isset($_POST['paged']) ? intval( wp_unslash($_POST['paged']) ) : 1;
+    $clbgd_sort_order = isset($_POST['sort_order']) ? sanitize_text_field( wp_unslash($_POST['sort_order']) ) : 'DESC';
+
+    // phpcs:enable WordPress.Security.NonceVerification.Missing
+    // phpcs:enable WordPress.Security.ValidatedSanitizedInput.MissingUnslash
     // sorting options
-    $sort_options = array(
+    // phpcs:disable WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+    $clbgd_sort_options = array(
         'ASC' => ['orderby' => 'date', 'order' => 'ASC'],
         'DESC' => ['orderby' => 'date', 'order' => 'DESC'],
         'A-Z' => ['orderby' => 'title', 'order' => 'ASC'],
@@ -33,22 +45,23 @@ function load_more_posts()
         'COMMENT' => ['orderby' => 'comment_count', 'order' => 'DESC'],
         'CUSTOM' => ['orderby' => 'meta_value_num', 'order' => 'ASC', 'meta_key' => 'custom_order']
     );
+    // phpcs:enable WordPress.DB.SlowDBQuery.slow_db_query_meta_key
     // fallback
-    $selected_sort = $sort_options[$sort_order] ?? $sort_options['DESC'];
-    $args = array_merge([
+    $clbgd_selected_sort = $clbgd_sort_options[$clbgd_sort_order] ?? $clbgd_sort_options['DESC'];
+    $clbgd_args = array_merge([
         'post_type' => 'post',
-        'posts_per_page' => $posts_per_page,
+        'posts_per_page' => $clbgd_posts_per_page,
         'paged' => $page,
-    ], $selected_sort);
+    ], $clbgd_selected_sort);
 
-    $query = new WP_Query($args);
-    if ($query->have_posts()) {
+    $clbgd_query = new WP_Query($clbgd_args);
+    if ($clbgd_query->have_posts()) {
         ob_start();
 
-        while ($query->have_posts()) {
-            $query->the_post();
+        while ($clbgd_query->have_posts()) {
+            $clbgd_query->the_post();
             ?>
-            <div class="masonry-item" <?php if ($enable_featured_image !== 'disable' && has_post_thumbnail()): ?>
+            <div class="masonry-item" <?php if ($clbgd_enable_featured_image !== 'disable' && has_post_thumbnail()): ?>
                     style="background-image: url('<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'medium')); ?>'); background-size: cover; background-position: center;"
                 <?php endif; ?>>
                 <div class="masonry-item-content-wrapper">
@@ -61,34 +74,34 @@ function load_more_posts()
                             </a>
                         </h2>
                         <div class="clbgd-masonry-meta-items">
-                            <?php if ($show_date): ?>
+                            <?php if ($clbgd_show_date): ?>
                                 <p class="clbgd-masonry-item-date clbgd-blog-post-meta-font">
                                     <?php echo esc_html(get_the_date('F j, Y')); ?>
                                 </p>
                             <?php endif; ?>
 
-                            <?php if ($show_author): ?>
+                            <?php if ($clbgd_show_author): ?>
                                 <p class="clbgd-masonry-item-author clbgd-blog-post-meta-font">
                                     <?php echo esc_html__('By', 'classic-blog-grid') . ' ' . esc_html(get_the_author()); ?>
                                 </p>
                             <?php endif; ?>
 
-                            <?php if ($show_categories): ?>
+                            <?php if ($clbgd_show_categories): ?>
                                 <p class="clbgd-masonry-item-category clbgd-blog-post-meta-font">
                                     <?php echo esc_html__('Category: ', 'classic-blog-grid') . wp_kses_post(get_the_category_list(', ')); ?>
                                 </p>
                             <?php endif; ?>
                         </div>
-                        <?php if ($show_excerpt): ?>
+                        <?php if ($clbgd_show_excerpt): ?>
                             <p class="clbgd-masonry-item-excerpt clbgd-blog-post-excerpt-font">
-                                <?php echo esc_html(wp_trim_words(get_the_excerpt(), $excerpt_length, '...')); ?>
+                                <?php echo esc_html(wp_trim_words(get_the_excerpt(), $clbgd_excerpt_length, '...')); ?>
                             </p>
                         <?php endif; ?>
-                        <?php if ($show_tags): ?>
-                            <?php $tags = get_the_tags(); ?>
-                            <?php if ($tags): ?>
+                        <?php if ($clbgd_show_tags): ?>
+                            <?php $clbgd_tags = get_the_tags(); ?>
+                            <?php if ($clbgd_tags): ?>
                                 <p class="clbgd-blog-post-tags clbgd-blog-post-meta-font">
-                                    <?php foreach ($tags as $tag): ?>
+                                    <?php foreach ($clbgd_tags as $tag): ?>
                                         <a href="<?php echo esc_url(get_tag_link($tag->term_id)); ?>">
                                             <?php echo esc_html($tag->name); ?>
                                         </a>
@@ -97,7 +110,7 @@ function load_more_posts()
                             <?php endif; ?>
                         <?php endif; ?>
                         <div class="clbgd-blogs-share-comment">
-                            <?php if ($show_social_share): ?>
+                            <?php if ($clbgd_show_social_share): ?>
                                 <div class="clbgd-social-share-buttons">
                                     <span class="clbgd-blog-post-meta-font"><?php esc_html_e('Share:', 'classic-blog-grid'); ?></span>
                                     <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_permalink()); ?>"
@@ -118,13 +131,13 @@ function load_more_posts()
                                     </a>
                                 </div>
                             <?php endif; ?>
-                            <?php if ($show_comments): ?>
+                            <?php if ($clbgd_show_comments): ?>
                                 <p class="clbgd-masonry-item-comments clbgd-blog-post-meta-font">
                                     <?php echo esc_html(get_comments_number()) . ' ' . esc_html__('Comments', 'classic-blog-grid'); ?>
                                 </p>
                             <?php endif; ?>
                         </div>
-                        <?php if ($show_read_more): ?>
+                        <?php if ($clbgd_show_read_more): ?>
                             <a href="<?php echo esc_url(get_permalink()); ?>"
                                 class="clbgd-masonry-item-button clbgd-blog-post-content2 clbgd-button">Read More</a>
                         <?php endif; ?>

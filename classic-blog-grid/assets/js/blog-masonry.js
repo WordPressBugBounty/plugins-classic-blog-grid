@@ -29,7 +29,7 @@ jQuery(document).ready(function($) {
             url: clbgd_ajax.ajaxurl,
             type: 'POST',
             data: {
-                action: 'load_more_posts',
+                action: 'clbgd_load_more_posts',
                 page: page,
                 post_id: postId,
 

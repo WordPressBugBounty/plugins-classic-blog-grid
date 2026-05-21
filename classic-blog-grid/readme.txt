@@ -2,9 +2,9 @@
 Contributors: classictemplate
 Tags: blog, blog-display, grid-layout, post-grid, post-slider
 Requires at least: 5.2
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 7.2
-Stable tag: 1.9
+Stable tag: 2.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -134,6 +134,10 @@ enhancing your blog with the Classic Blog Grid Plugin!
 
 
 == Changelog ==
+
+= 2.0 - 2026-05-04 =
+* Plugin check errors - resolved.
+* Post title max length - issue fixed.
 
 = 1.9 - 2025-12-25 =
 * Added option to customize **"Read More" button text**.

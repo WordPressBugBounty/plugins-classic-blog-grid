@@ -1,4 +1,7 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit;
+}
 function clbgd_get_collections() {
     $endpoint_url = CLBGD_API_URL . 'getCollections';
     $options = [
@@ -23,6 +26,7 @@ function clbgd_get_collections() {
 }
 
 function clbgd_get_filtered_products($cursor = '', $search = '', $collection = 'best-wordpress-templates') {
+    
     $endpoint_url = CLBGD_API_URL . 'getFilteredProducts';
 
     $remote_post_data = array(
