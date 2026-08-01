@@ -20,6 +20,7 @@ $clbgd_show_categories = $meta_values['show_categories'];
 $clbgd_enable_featured_image = $meta_values['enable_featured_image'];
 $clbgd_show_social_share = $meta_values['show_social_share'];
 $clbgd_show_tags = isset($meta_values['show_tags']) ? $meta_values['show_tags'] : false;
+$clbgd_link_target = !empty($meta_values['open_new_tab']) && $meta_values['open_new_tab'] == '1' ? ' target="_blank" rel="noopener noreferrer"' : '';
 $clbgd_sort_order = get_post_meta($post_id, '_clbgd_sort_order', true);
 $clbgd_sort_order = $clbgd_sort_order ? strtoupper($clbgd_sort_order) : 'DESC';
 
@@ -100,7 +101,7 @@ $clbgd_query = new WP_Query($clbgd_args);
                     }
                     ?>
                     <div class="clbgd-blog-grid-image <?php echo esc_attr($clbgd_image_aspect_class); ?>">
-                        <a href="<?php the_permalink(); ?>">
+                        <a href="<?php the_permalink(); ?>"<?php echo $clbgd_link_target; ?>>
                             <?php the_post_thumbnail('medium'); ?>
                         </a>
                     </div>
@@ -108,7 +109,7 @@ $clbgd_query = new WP_Query($clbgd_args);
 
                 <div class="clbgd-blog-grid-content">
                     <h2 class="clbgd-blog-grid-title clbgd-blog-post-tittle-font">
-                        <a class="clbgd-blog-post-tittle-font" href="<?php the_permalink(); ?>">
+                        <a class="clbgd-blog-post-tittle-font" href="<?php the_permalink(); ?>"<?php echo $clbgd_link_target; ?>>
                         <?php echo $clbgd_title_length ? esc_html(wp_trim_words(get_the_title(), $clbgd_title_length)) : esc_html(get_the_title()); ?></a>
                     </h2>
                     <?php if ($clbgd_show_excerpt): ?>

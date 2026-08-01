@@ -16,6 +16,7 @@ $clbgd_show_categories = $meta_values['show_categories'];
 $clbgd_enable_featured_image = $meta_values['enable_featured_image'];
 $clbgd_show_social_share = $meta_values['show_social_share'];
 $clbgd_show_tags = isset($meta_values['show_tags']) ? $meta_values['show_tags'] : false;
+$clbgd_link_target = !empty($meta_values['open_new_tab']) && $meta_values['open_new_tab'] == '1' ? ' target="_blank" rel="noopener noreferrer"' : '';
 //new sort order
 $clbgd_sort_order = get_post_meta($post_id, '_clbgd_sort_order', true);
 $clbgd_sort_order = $clbgd_sort_order ? strtoupper($clbgd_sort_order) : 'DESC';
@@ -96,7 +97,7 @@ if ($clbgd_query->have_posts()):
                     <div class="clbgd-grid-content">
                         <h2 class="clbgd-grid-title clbgd-blog-post-tittle-font">
                             <a class="clbgd-blog-post-content2" href="<?php echo esc_url(get_permalink()); ?>"
-                                title="<?php echo esc_attr(get_the_title()); ?>">
+                                title="<?php echo esc_attr(get_the_title()); ?>"<?php echo $clbgd_link_target; ?>>
                         <?php echo $clbgd_title_length ? esc_html(wp_trim_words(get_the_title(), $clbgd_title_length)) : esc_html(get_the_title()); ?>
                             </a>
                         </h2>
@@ -172,7 +173,7 @@ if ($clbgd_query->have_posts()):
                     </div>
                     <?php if ($clbgd_show_read_more): ?>
                         <div class="clbgd-grid-read-more">
-                            <a href="<?php echo esc_url(get_permalink()); ?>"
+                            <a href="<?php echo esc_url(get_permalink()); ?>"<?php echo $clbgd_link_target; ?>
                                 class="clbgd-read-more-btn clbgd-blog-post-content2 clbgd-button"><?php echo esc_html($meta_values['custom_read_more_text']); ?></a>
                         </div>
                     <?php endif; ?>

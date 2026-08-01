@@ -4,7 +4,7 @@ Tags: blog, blog-display, grid-layout, post-grid, post-slider
 Requires at least: 5.2
 Tested up to: 6.9
 Requires PHP: 7.2
-Stable tag: 2.0
+Stable tag: 2.1
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -134,6 +134,9 @@ enhancing your blog with the Classic Blog Grid Plugin!
 
 
 == Changelog ==
+
+= 2.1 - 2026-07-30 =
+* Added "Open Post Links in New Tab" option to control whether post title, thumbnail, and read more links open in a new browser tab.
 
 = 2.0 - 2026-05-04 =
 * Plugin check errors - resolved.

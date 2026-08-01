@@ -17,6 +17,7 @@ $clbgd_show_social_share = $meta_values['show_social_share'];
 //show tags
 $clbgd_show_tags = isset($meta_values['show_tags']) ? $meta_values['show_tags'] : false;
 ;
+$clbgd_link_target = !empty($meta_values['open_new_tab']) && $meta_values['open_new_tab'] == '1' ? ' target="_blank" rel="noopener noreferrer"' : '';
 $clbgd_posts_per_row = get_post_meta($post_id, '_clbgd_posts_per_row', true);
 $clbgd_posts_per_row = $clbgd_posts_per_row ? $clbgd_posts_per_row : 2;
 $clbgd_enable_ajax_masonry = get_post_meta($post_id, '_clbgd_enable_ajax_masonry', true);
@@ -91,7 +92,7 @@ if ($clbgd_query->have_posts()): ?>
                         <div class="clbgd blog-content-box">
                             <h2 class="clbgd-masonry-item-title clbgd-blog-post-tittle-font">
                                 <a class="clbgd-blog-post-tittle-font" href="<?php echo esc_url(get_permalink()); ?>"
-                                    title="<?php echo esc_attr(get_the_title()); ?>">
+                                    title="<?php echo esc_attr(get_the_title()); ?>"<?php echo $clbgd_link_target; ?>>
                                     <?php echo $clbgd_title_length ? esc_html(wp_trim_words(get_the_title(), $clbgd_title_length)) : esc_html(get_the_title()); ?>
                                 </a>
                             </h2>
@@ -166,7 +167,7 @@ if ($clbgd_query->have_posts()): ?>
                             </div>
                             <!-- END Social Share Buttons -->
                             <?php if ($clbgd_show_read_more): ?>
-                                <a href="<?php echo esc_url(get_permalink()); ?>"
+                                <a href="<?php echo esc_url(get_permalink()); ?>"<?php echo $clbgd_link_target; ?>
                                     class="clbgd-masonry-item-button clbgd-blog-post-content2 clbgd-button"><?php echo esc_html($meta_values['custom_read_more_text']); ?></a>
                             <?php endif; ?>
                         </div>

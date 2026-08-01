@@ -147,7 +147,7 @@ function clbgd_admin_notice_with_html() {
             <div class="banner-content-wrap">
                 <div class="clbgd-content-wrap d-flex flex-column gap-3 text-center">
                 <h3 class="clbgd-banner-heading"><?php echo esc_html('WordPress Theme Bundle'); ?></h3>
-                <p class="clbgd-banner-para"><?php echo esc_html('Discover the WordPress Theme Bundle from The Classic Templates with 100+ stunning themes for any niche!'); ?></p>
+                <p class="clbgd-banner-para"><?php echo esc_html('Discover the WordPress Theme Bundle from The Classic Templates with 112+ stunning themes for any niche!'); ?></p>
                 <div class="clbgd-banner-btn-wrap">
                     <a href="<?php echo esc_url( CLBGD_SERVER_URL . 'products/wordpress-theme-bundle' ); ?>" target="_blank" class="clbgd-banner-btn clbgd-btn"><?php echo esc_html('Purchase Now'); ?></a>
                     <a href="<?php echo esc_url( CLBGD_SERVER_URL . 'collections/best-wordpress-templates' ); ?>" target="_blank" class="clbgd-banner-btn clbgd-btn"><?php echo esc_html('Live Preview'); ?></a>

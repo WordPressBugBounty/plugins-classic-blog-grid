@@ -784,7 +784,18 @@ $clbgd_is_premium_user = get_option('classic_blog_grid_is_premium', false);
                                         <input type="checkbox" name="show_pagination" id="show_pagination" value="1"
                                             <?php checked(get_post_meta($post_id, '_clbgd_show_pagination', true), '1'); ?> />
                                         <label for="show_pagination"><?php esc_html_e('Enable pagination for post navigation.', 'classic-blog-grid'); ?></label>
-                                       
+
+                                    </div>
+                                    </div>
+
+                                    <!-- Open Links in New Tab -->
+                                    <div class="styling-customization-row-box">
+                                    <div class="styling-customization-row open-new-tab-option">
+                                        <label for="open_new_tab"><?php esc_html_e('Open Post Links in New Tab', 'classic-blog-grid'); ?></label>
+                                        <span class="pro-badge">Free</span>
+                                        <input type="checkbox" name="open_new_tab" id="open_new_tab" value="1"
+                                            <?php checked(get_post_meta($post_id, '_clbgd_open_new_tab', true), '1'); ?> />
+                                        <label for="open_new_tab"><?php esc_html_e('Open the post title and read more links in a new browser tab.', 'classic-blog-grid'); ?></label>
                                     </div>
                                     </div>
 

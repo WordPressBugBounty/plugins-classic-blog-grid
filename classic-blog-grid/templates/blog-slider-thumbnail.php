@@ -19,6 +19,7 @@ $clbgd_enable_featured_image = $meta_values['enable_featured_image'];
 $clbgd_show_social_share = $meta_values['show_social_share'];
 //show tags
 $clbgd_show_tags = isset($meta_values['show_tags']) ? $meta_values['show_tags'] : false;;
+$clbgd_link_target = !empty($meta_values['open_new_tab']) && $meta_values['open_new_tab'] == '1' ? ' target="_blank" rel="noopener noreferrer"' : '';
 $clbgd_sort_order = get_post_meta($post_id, '_clbgd_sort_order', true);
 $clbgd_sort_order = $clbgd_sort_order ? strtoupper($clbgd_sort_order) : 'DESC'; 
 // sorting options
@@ -96,7 +97,7 @@ if ($clbgd_blog_posts->have_posts()) : ?>
                 <div class="clbgd-slider-content">
                     <!-- new conditionally -->
                     <h2 class="clbgd-slide-title clbgd-blog-post-tittle-font">
-                        <a class="clbgd-blog-post-tittle-font" href="<?php the_permalink(); ?>"><?php echo $clbgd_title_length ? esc_html(wp_trim_words(get_the_title(), $clbgd_title_length)) : esc_html(get_the_title()); ?></a>
+                        <a class="clbgd-blog-post-tittle-font" href="<?php the_permalink(); ?>"<?php echo $clbgd_link_target; ?>><?php echo $clbgd_title_length ? esc_html(wp_trim_words(get_the_title(), $clbgd_title_length)) : esc_html(get_the_title()); ?></a>
                     </h2>
                     <div class="clbgd-slider-meta-content">
                         <?php if ($clbgd_show_date): ?>
@@ -167,7 +168,7 @@ if ($clbgd_blog_posts->have_posts()) : ?>
                     <?php endif; ?>
                     <?php if ($clbgd_show_read_more): ?>
                     <!-- END Social Share Buttons -->
-                    <a href="<?php the_permalink(); ?>" class="clbgd-slide-thumb-button clbgd-blog-post-content2 clbgd-button"><?php echo esc_html($clbgd_custom_read_more_text); ?></a>
+                    <a href="<?php the_permalink(); ?>"<?php echo $clbgd_link_target; ?> class="clbgd-slide-thumb-button clbgd-blog-post-content2 clbgd-button"><?php echo esc_html($clbgd_custom_read_more_text); ?></a>
                     <?php endif; ?>
                 </div>
                 <div class="slider-thambnail-item-overlay">

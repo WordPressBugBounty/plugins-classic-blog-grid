@@ -94,7 +94,8 @@ class Clbgd_Shortcodes {
             'image_aspect_ratio' => get_post_meta($post_id, '_clbgd_image_aspect_ratio', true) ?: 'auto',
             'include_categories_tags' => get_post_meta($post_id, '_clbgd_include_categories_tags', true) ?: '',
             'exclude_categories_tags' => get_post_meta($post_id, '_clbgd_exclude_categories_tags', true) ?: '',
-            // new end         
+            // new end
+            'open_new_tab' => get_post_meta($post_id, '_clbgd_open_new_tab', true) ?: '0',
         );
     }
 

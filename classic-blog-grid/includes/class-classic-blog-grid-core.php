@@ -318,6 +318,7 @@ class Clbgd_Core
         $show_pagination = isset($_POST['show_pagination']) ? '1' : '0';
         $image_aspect_ratio = isset($_POST['image_aspect_ratio']) ? sanitize_text_field(wp_unslash($_POST['image_aspect_ratio'])) : 'auto';
         $include_exclude_categories = isset($_POST['include_exclude_categories']) ? sanitize_text_field(wp_unslash($_POST['include_exclude_categories'])) : '';
+        $clbgd_open_new_tab = isset($_POST['open_new_tab']) ? '1' : '0';
        
         // new end
         $post_id = isset($_POST['post_id']) ? intval($_POST['post_id']) : 0;
@@ -368,6 +369,7 @@ class Clbgd_Core
             if (isset($_POST['exclude_categories_tags'])) {
                 update_post_meta($post_id, '_clbgd_exclude_categories_tags', sanitize_text_field(wp_unslash($_POST['exclude_categories_tags'])));
             }
+            update_post_meta($post_id, '_clbgd_open_new_tab', $clbgd_open_new_tab);
             //new end
         }
 
