@@ -2,9 +2,9 @@
 Contributors: classictemplate
 Tags: blog, blog-display, grid-layout, post-grid, post-slider
 Requires at least: 5.2
-Tested up to: 6.9
-Requires PHP: 7.2
-Stable tag: 2.1
+Tested up to: 7.1
+Requires PHP: 7.4
+Stable tag: 2.2
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -134,6 +134,15 @@ enhancing your blog with the Classic Blog Grid Plugin!
 
 
 == Changelog ==
+
+= 2.2 - 2026-09-07 =
+* Fixed: "Load More" button in the Masonry layout never worked due to a mismatched AJAX action name.
+* Security: Added nonce verification to the "Load More" and live search AJAX endpoints.
+* Fixed: PHP warnings on the "Add New Grid" screen when creating a new grid (undefined color/font-weight fields).
+* Fixed: PHP warning in the live search results when a search returned only one page of results.
+* Fixed: Grid save could silently fail if a stale "premium" flag remained set without the Pro plugin active.
+* Fixed: Invalid stray character rendered into the masonry "Load More" button markup.
+* Improved: Output escaping and category-ID sanitization hardened across grid templates.
 
 = 2.1 - 2026-07-30 =
 * Added "Open Post Links in New Tab" option to control whether post title, thumbnail, and read more links open in a new browser tab.

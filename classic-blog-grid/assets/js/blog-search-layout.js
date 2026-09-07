@@ -17,6 +17,7 @@ jQuery(document).ready(function($) {
             type: 'POST',
             data: {
                 action: 'clbgd_search',
+                nonce: clbgd_ajax.nonce,
                 search: searchValue,
                 paged: paged, // Send page number
                 show_date: showDate,

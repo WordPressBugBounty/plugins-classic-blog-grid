@@ -4,11 +4,12 @@ if (!defined('ABSPATH')) {
 }
 ?>
 <?php
-add_action('wp_ajax_load_more_posts', 'clbgd_load_more_posts');
-add_action('wp_ajax_nopriv_load_more_posts', 'clbgd_load_more_posts');
+add_action('wp_ajax_clbgd_load_more_posts', 'clbgd_load_more_posts');
+add_action('wp_ajax_nopriv_clbgd_load_more_posts', 'clbgd_load_more_posts');
 function clbgd_load_more_posts()
 {
-    // phpcs:disable WordPress.Security.NonceVerification.Missing
+    check_ajax_referer('clbgd_frontend_ajax_nonce', 'nonce');
+
     // phpcs:disable WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 
     $page = isset($_POST['page']) ? intval( wp_unslash($_POST['page']) ) : 1;
@@ -29,7 +30,6 @@ function clbgd_load_more_posts()
     $clbgd_paged = isset($_POST['paged']) ? intval( wp_unslash($_POST['paged']) ) : 1;
     $clbgd_sort_order = isset($_POST['sort_order']) ? sanitize_text_field( wp_unslash($_POST['sort_order']) ) : 'DESC';
 
-    // phpcs:enable WordPress.Security.NonceVerification.Missing
     // phpcs:enable WordPress.Security.ValidatedSanitizedInput.MissingUnslash
     // sorting options
     // phpcs:disable WordPress.DB.SlowDBQuery.slow_db_query_meta_key

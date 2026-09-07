@@ -34,6 +34,14 @@ $clbgd_enable_sidebar_category_filter = get_post_meta($post_id, '_clbgd_enable_s
 $clbgd_show_tags = get_post_meta($post_id, '_clbgd_show_tags', true);
 $clbgd_show_social_share = get_post_meta($post_id, '_clbgd_show_social_share', true);
 $clbgd_is_premium_user = get_option('classic_blog_grid_is_premium', false);
+$grid_overlay_color = isset($grid_overlay_color) ? $grid_overlay_color : '';
+$tittle_font_color = isset($tittle_font_color) ? $tittle_font_color : '';
+$tittle_hover_color = isset($tittle_hover_color) ? $tittle_hover_color : '';
+$clbgd_tittle_font_weight = isset($clbgd_tittle_font_weight) ? $clbgd_tittle_font_weight : '';
+$excerpt_font_color = isset($excerpt_font_color) ? $excerpt_font_color : '';
+$clbgd_excerpt_font_weight = isset($clbgd_excerpt_font_weight) ? $clbgd_excerpt_font_weight : '';
+$meta_font_color = isset($meta_font_color) ? $meta_font_color : '';
+$clbgd_meta_font_weight = isset($clbgd_meta_font_weight) ? $clbgd_meta_font_weight : '';
 ?>
 
 <div class="container-fluid">
@@ -61,7 +69,11 @@ $clbgd_is_premium_user = get_option('classic_blog_grid_is_premium', false);
             </h1>
             <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
                 <?php wp_nonce_field('clbgd_save_grid', 'clbgd_nonce'); ?>
-                <input type="hidden" name="action" value="<?php echo $clbgd_is_premium_user ? 'clbgd_save_grid_pro' : 'clbgd_save_grid' ; ?>" />
+                <?php
+                    $clbgd_pro_active = is_plugin_active('classic-blog-grid-pro/classic-blog-grid-pro.php');
+                    $clbgd_save_action = ($clbgd_is_premium_user && $clbgd_pro_active) ? 'clbgd_save_grid_pro' : 'clbgd_save_grid';
+                ?>
+                <input type="hidden" name="action" value="<?php echo esc_attr($clbgd_save_action); ?>" />
                 <input type="hidden" name="post_id" value="<?php echo esc_attr($post_id); ?>">
 
                 <table class="form-table">

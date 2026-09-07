@@ -7,7 +7,8 @@ if (!defined('ABSPATH')) {
 <?php
 function clbgd_ajax_search() {
 
-// phpcs:disable WordPress.Security.NonceVerification.Missing
+check_ajax_referer('clbgd_frontend_ajax_nonce', 'nonce');
+
 // phpcs:disable WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 
 $clbgd_search_query = isset($_POST['search'])
@@ -66,7 +67,6 @@ $clbgd_paged = isset($_POST['paged'])
 $clbgd_sort_order = isset($_POST['sort_order'])
     ? sanitize_text_field( wp_unslash($_POST['sort_order']) )
     : 'DESC';
-// phpcs:enable WordPress.Security.NonceVerification.Missing
 // phpcs:enable WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 
 
@@ -195,6 +195,7 @@ $clbgd_args = array_merge([
     </div>
     <?php
      $html = ob_get_clean();
+     $pagination = '';
      if ($clbgd_query->max_num_pages > 1) :
      $pagination = paginate_links(array(
          'total'     => $clbgd_query->max_num_pages,

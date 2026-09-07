@@ -26,7 +26,7 @@ $clbgd_categories = get_categories(array(
 ));
 // Fetch posts based on selected category
 // phpcs:ignore WordPress.Security.NonceVerification.Recommended 
-$clbgd_selected_category = isset($_GET['category']) ?  sanitize_text_field(wp_unslash($_GET['category'])) : '';
+$clbgd_selected_category = isset($_GET['category']) ?  absint(wp_unslash($_GET['category'])) : '';
 $clbgd_posts_per_page = get_post_meta($post_id, '_clbgd_posts_per_page', true);
 $clbgd_posts_per_page = $clbgd_posts_per_page ? $clbgd_posts_per_page : 5;
 $clbgd_paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
@@ -122,13 +122,13 @@ if ($clbgd_query->have_posts()) :
                         }
                         ?>
                     <div class="clbgd-post-thumbnail <?php echo esc_attr($clbgd_image_aspect_class); ?>">
-                        <a href="<?php the_permalink(); ?>"<?php echo $clbgd_link_target; ?>>
+                        <a href="<?php the_permalink(); ?>"<?php echo wp_kses($clbgd_link_target, array()); ?>>
                             <?php the_post_thumbnail('medium'); ?>
                         </a>
                     </div>
                     <?php endif; ?>
                     <div class="clbgd-post-details">
-                        <h3 class="clbgd-blog-post-tittle-font"><a class="clbgd-blog-post-tittle-font" href="<?php the_permalink(); ?>"<?php echo $clbgd_link_target; ?>><?php echo $clbgd_title_length ? esc_html(wp_trim_words(get_the_title(), $clbgd_title_length)) : esc_html(get_the_title()); ?></a>
+                        <h3 class="clbgd-blog-post-tittle-font"><a class="clbgd-blog-post-tittle-font" href="<?php the_permalink(); ?>"<?php echo wp_kses($clbgd_link_target, array()); ?>><?php echo $clbgd_title_length ? esc_html(wp_trim_words(get_the_title(), $clbgd_title_length)) : esc_html(get_the_title()); ?></a>
                         </h3>
                         <div class="clbgd-blog-category-title">
                             <?php if ($clbgd_show_categories): ?>
@@ -201,7 +201,7 @@ if ($clbgd_query->have_posts()) :
                         <!-- END Social Share Buttons -->
                         <?php if ($clbgd_show_read_more): ?>
                         <div class="clbgd-button-box">
-                            <a href="<?php echo esc_url(get_permalink()); ?>"<?php echo $clbgd_link_target; ?>
+                            <a href="<?php echo esc_url(get_permalink()); ?>"<?php echo wp_kses($clbgd_link_target, array()); ?>
                                 class="clbgd-read-more-btn clbgd-blog-post-content2 clbgd-button"><?php echo esc_html($clbgd_custom_read_more_text); ?></a>
                         </div>
                         <?php endif; ?>

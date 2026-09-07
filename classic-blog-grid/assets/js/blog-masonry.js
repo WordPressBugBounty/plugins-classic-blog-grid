@@ -30,6 +30,7 @@ jQuery(document).ready(function($) {
             type: 'POST',
             data: {
                 action: 'clbgd_load_more_posts',
+                nonce: clbgd_ajax.nonce,
                 page: page,
                 post_id: postId,
 

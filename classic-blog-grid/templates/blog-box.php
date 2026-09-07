@@ -97,7 +97,7 @@ if ($clbgd_query->have_posts()):
                     <div class="clbgd-grid-content">
                         <h2 class="clbgd-grid-title clbgd-blog-post-tittle-font">
                             <a class="clbgd-blog-post-content2" href="<?php echo esc_url(get_permalink()); ?>"
-                                title="<?php echo esc_attr(get_the_title()); ?>"<?php echo $clbgd_link_target; ?>>
+                                title="<?php echo esc_attr(get_the_title()); ?>"<?php echo wp_kses($clbgd_link_target, array()); ?>>
                         <?php echo $clbgd_title_length ? esc_html(wp_trim_words(get_the_title(), $clbgd_title_length)) : esc_html(get_the_title()); ?>
                             </a>
                         </h2>
@@ -173,7 +173,7 @@ if ($clbgd_query->have_posts()):
                     </div>
                     <?php if ($clbgd_show_read_more): ?>
                         <div class="clbgd-grid-read-more">
-                            <a href="<?php echo esc_url(get_permalink()); ?>"<?php echo $clbgd_link_target; ?>
+                            <a href="<?php echo esc_url(get_permalink()); ?>"<?php echo wp_kses($clbgd_link_target, array()); ?>
                                 class="clbgd-read-more-btn clbgd-blog-post-content2 clbgd-button"><?php echo esc_html($meta_values['custom_read_more_text']); ?></a>
                         </div>
                     <?php endif; ?>

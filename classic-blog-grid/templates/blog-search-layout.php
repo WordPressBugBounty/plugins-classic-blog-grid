@@ -101,7 +101,7 @@ $clbgd_query = new WP_Query($clbgd_args);
                     }
                     ?>
                     <div class="clbgd-blog-grid-image <?php echo esc_attr($clbgd_image_aspect_class); ?>">
-                        <a href="<?php the_permalink(); ?>"<?php echo $clbgd_link_target; ?>>
+                        <a href="<?php the_permalink(); ?>"<?php echo wp_kses($clbgd_link_target, array()); ?>>
                             <?php the_post_thumbnail('medium'); ?>
                         </a>
                     </div>
@@ -109,7 +109,7 @@ $clbgd_query = new WP_Query($clbgd_args);
 
                 <div class="clbgd-blog-grid-content">
                     <h2 class="clbgd-blog-grid-title clbgd-blog-post-tittle-font">
-                        <a class="clbgd-blog-post-tittle-font" href="<?php the_permalink(); ?>"<?php echo $clbgd_link_target; ?>>
+                        <a class="clbgd-blog-post-tittle-font" href="<?php the_permalink(); ?>"<?php echo wp_kses($clbgd_link_target, array()); ?>>
                         <?php echo $clbgd_title_length ? esc_html(wp_trim_words(get_the_title(), $clbgd_title_length)) : esc_html(get_the_title()); ?></a>
                     </h2>
                     <?php if ($clbgd_show_excerpt): ?>

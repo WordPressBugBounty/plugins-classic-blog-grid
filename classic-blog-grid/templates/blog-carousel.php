@@ -116,7 +116,7 @@ if ($clbgd_query->have_posts()) : ?>
                             <!-- end -->
                         </div>
                         <h2 class="carousel-title clbgd-blog-post-tittle-font">
-                        <a class="clbgd-blog-post-tittle-font" href="<?php echo esc_url(get_permalink()); ?>" title="<?php echo esc_attr(get_the_title()); ?>"<?php echo $clbgd_link_target; ?>>
+                        <a class="clbgd-blog-post-tittle-font" href="<?php echo esc_url(get_permalink()); ?>" title="<?php echo esc_attr(get_the_title()); ?>"<?php echo wp_kses($clbgd_link_target, array()); ?>>
                         <?php echo $clbgd_title_length ? esc_html(wp_trim_words(get_the_title(), $clbgd_title_length)) : esc_html(get_the_title()); ?>
                          </a>
                         </h2>
@@ -166,7 +166,7 @@ if ($clbgd_query->have_posts()) : ?>
 
                         <!-- END Social Share Buttons -->
                         <?php if ($clbgd_show_read_more): ?>
-                        <a href="<?php the_permalink(); ?>"<?php echo $clbgd_link_target; ?> class="carousel-button clbgd-blog-post-content2 clbgd-button"><?php echo esc_html($clbgd_custom_read_more_text); ?></a>
+                        <a href="<?php the_permalink(); ?>"<?php echo wp_kses($clbgd_link_target, array()); ?> class="carousel-button clbgd-blog-post-content2 clbgd-button"><?php echo esc_html($clbgd_custom_read_more_text); ?></a>
                         <?php endif; ?>   
                     </div>
                     <div class="carousel-item-overlay"></div>

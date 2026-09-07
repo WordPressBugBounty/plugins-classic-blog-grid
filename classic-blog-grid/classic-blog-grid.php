@@ -3,9 +3,9 @@
  * Plugin Name:       Classic Blog Grid
  * Plugin URI:        https://www.theclassictemplates.com/products/classic-blog-grid-pro
  * Description:       A plugin to display blog posts in various grid formats: list, masonry, and slider.
- * Version:           2.1
+ * Version:           2.2
  * Requires at least: 5.2
- * Requires PHP:      7.2
+ * Requires PHP:      7.4
  * Author:            classictemplate
  * Author URI:        https://www.theclassictemplates.com
  * License:           GPL v2 or later
@@ -17,7 +17,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('CLBGD_PLUGIN_VERSION', '2.1');
+define('CLBGD_PLUGIN_VERSION', '2.2');
 
 define('CLBGD_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('CLBGD_PLUGIN_URL', plugin_dir_url(__FILE__));

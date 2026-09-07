@@ -207,7 +207,8 @@ class Clbgd_Shortcodes {
     }
     //end 
          wp_localize_script("clbgd-{$styles[$type]}-js", 'clbgd_ajax', array(
-             'ajaxurl' => admin_url('admin-ajax.php')
+             'ajaxurl' => admin_url('admin-ajax.php'),
+             'nonce' => wp_create_nonce('clbgd_frontend_ajax_nonce')
          ));
         if ($type === 'masonry') {
             $inline_css = sprintf(

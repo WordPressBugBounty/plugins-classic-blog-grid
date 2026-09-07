@@ -92,7 +92,7 @@ if ($clbgd_query->have_posts()): ?>
                         <div class="clbgd blog-content-box">
                             <h2 class="clbgd-masonry-item-title clbgd-blog-post-tittle-font">
                                 <a class="clbgd-blog-post-tittle-font" href="<?php echo esc_url(get_permalink()); ?>"
-                                    title="<?php echo esc_attr(get_the_title()); ?>"<?php echo $clbgd_link_target; ?>>
+                                    title="<?php echo esc_attr(get_the_title()); ?>"<?php echo wp_kses($clbgd_link_target, array()); ?>>
                                     <?php echo $clbgd_title_length ? esc_html(wp_trim_words(get_the_title(), $clbgd_title_length)) : esc_html(get_the_title()); ?>
                                 </a>
                             </h2>
@@ -167,7 +167,7 @@ if ($clbgd_query->have_posts()): ?>
                             </div>
                             <!-- END Social Share Buttons -->
                             <?php if ($clbgd_show_read_more): ?>
-                                <a href="<?php echo esc_url(get_permalink()); ?>"<?php echo $clbgd_link_target; ?>
+                                <a href="<?php echo esc_url(get_permalink()); ?>"<?php echo wp_kses($clbgd_link_target, array()); ?>
                                     class="clbgd-masonry-item-button clbgd-blog-post-content2 clbgd-button"><?php echo esc_html($meta_values['custom_read_more_text']); ?></a>
                             <?php endif; ?>
                         </div>
@@ -211,7 +211,7 @@ if ($clbgd_query->have_posts()): ?>
                     data-show-excerpt="<?php echo esc_attr($clbgd_show_excerpt); ?>" data-show-tags="<?php echo esc_attr($clbgd_show_tags); ?>"
                     data-excerpt-length="<?php echo esc_attr($clbgd_excerpt_length); ?>"
                     data-sort-order="<?php echo esc_attr($clbgd_sort_order); ?>"
-                    data-show-comments="<?php echo esc_attr($clbgd_show_comments); ?>" \
+                    data-show-comments="<?php echo esc_attr($clbgd_show_comments); ?>"
                     data-enable-featured-image="<?php echo esc_attr($clbgd_enable_featured_image); ?>"
                     data-posts-per-page="<?php echo esc_attr($clbgd_posts_per_page); ?>"
                     data-show-social-share="<?php echo esc_attr($clbgd_show_social_share); ?>">
